@@ -22,11 +22,54 @@ module.exports = {
     let id_user = req.params.id_user;
     let user = await UserService.getUser(id_user);
 
-
     if (user) {
       json.result = user;
     } else {
       json.error = "User not found";
+    }
+
+    res.json(json);
+  },
+
+  insert: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let userObject = {
+      username: req.body.username,
+      name: req.body.name,
+      password: req.body.password,
+    };
+
+    if (userObject.username && userObject.name && userObject.password) {
+      let result = await UserService.insert(userObject);
+      json.result = result;
+    } else {
+      json.error = "Wrong user parameters";
+    }
+
+    res.json(json);
+  },
+
+  update: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let userObject = {
+      id_user: req.params.id_user,
+      username: req.body.username,
+      name: req.body.name,
+      password: req.body.password,
+    };
+
+    if (
+      userObject.id_user &&
+      userObject.username &&
+      userObject.name &&
+      userObject.password
+    ) {
+      await UserService.update(userObject);
+      json.result = userObject;
+    } else {
+      json.error = "Wrong user parameters";
     }
 
     res.json(json);

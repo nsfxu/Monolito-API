@@ -32,4 +32,36 @@ module.exports = {
       );
     });
   },
+
+  insert: ({ username, name, password }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO users (username, name, password) VALUES ('${username}', '${name}', '${password}')`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept({ username, name, password });
+        }
+      );
+    });
+  },
+
+  update: ({ id_user, username, name, password }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE users SET username = '${username}', name = '${name}', password = '${password}' WHERE id_user = '${id_user}'`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept({ id_user, username, name, password });
+        }
+      );
+    });
+  },
 };
