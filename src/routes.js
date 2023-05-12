@@ -11,6 +11,7 @@ router.get('/users', UserController.getAll);
 router.get('/user/:id_user', UserController.getUser);
 router.post('/user', UserController.insert);
 router.put('/user/:id_user', UserController.update);
+router.delete('/user/:id_user', UserController.delete);
 
 //#endregion
 

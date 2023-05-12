@@ -64,4 +64,20 @@ module.exports = {
       );
     });
   },
+
+  delete: (id_user) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from users WHERE id_user = '${id_user}'`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
 };

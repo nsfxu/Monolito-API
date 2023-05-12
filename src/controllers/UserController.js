@@ -74,4 +74,20 @@ module.exports = {
 
     res.json(json);
   },
+
+  delete: async (req, res) => {
+    let json = { error: "", result: {} };
+    let id_user = req.params.id_user;
+
+    if (id_user) {
+      let result = await UserService.delete(id_user);
+
+      if (result > 0) json.result = "User deleted!";
+      else json.result = "User id does not exists.";
+    } else {
+      json.error = "Invalid user id";
+    }
+
+    res.json(json);
+  },
 };
