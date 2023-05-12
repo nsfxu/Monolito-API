@@ -1,5 +1,4 @@
 const database = require("../db.js");
-const bcrypt = require("bcrypt");
 
 module.exports = {
   getPwd: ({ username }) => {
