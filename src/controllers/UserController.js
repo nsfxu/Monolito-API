@@ -28,7 +28,7 @@ module.exports = {
     res.json(json);
   },
 
-  insert: async (req, res) => {
+  createUser: async (req, res) => {
     let json = { error: "", result: {} };
 
     let userObject = {
