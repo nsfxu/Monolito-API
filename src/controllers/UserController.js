@@ -1,34 +1,24 @@
 const UserService = require("../services/UserService.js");
+const bcrypt = require("bcrypt");
 
 module.exports = {
-  getAll: async (req, res) => {
-    let json = { error: "", result: [] };
-    let users = await UserService.getAll();
+  login: async (req, res) => {
+    let userObject = {
+      username: req.body.username,
+      password: req.body.password,
+    };
 
-    users.map((user, index) => {
-      json.result.push({
-        id_user: user.id_user,
-        username: user.username,
-        name: user.name,
-      });
-    });
+    let hash_pwd = await UserService.getPwd(userObject);
 
-    res.json(json);
-  },
-
-  getUser: async (req, res) => {
-    let json = { error: "", result: {} };
-
-    let id_user = req.params.id_user;
-    let user = await UserService.getUser(id_user);
-
-    if (user) {
-      json.result = user;
+    if (hash_pwd) {
+      if (bcrypt.compareSync(userObject.password, hash_pwd)) {
+        res.send("Successful");
+      } else {
+        res.json({ error: "Incorrect Email and/or Password!" });
+      }
     } else {
-      json.error = "User not found";
+      res.json({ error: "Incorrect Email and/or Password!" });
     }
-
-    res.json(json);
   },
 
   insert: async (req, res) => {
@@ -40,52 +30,13 @@ module.exports = {
       password: req.body.password,
     };
 
+    userObject.password = await bcrypt.hash(userObject.password, 10);
+
     if (userObject.username && userObject.name && userObject.password) {
       let result = await UserService.insert(userObject);
       json.result = result;
     } else {
       json.error = "Wrong user parameters";
-    }
-
-    res.json(json);
-  },
-
-  update: async (req, res) => {
-    let json = { error: "", result: {} };
-
-    let userObject = {
-      id_user: req.params.id_user,
-      username: req.body.username,
-      name: req.body.name,
-      password: req.body.password,
-    };
-
-    if (
-      userObject.id_user &&
-      userObject.username &&
-      userObject.name &&
-      userObject.password
-    ) {
-      await UserService.update(userObject);
-      json.result = userObject;
-    } else {
-      json.error = "Wrong user parameters";
-    }
-
-    res.json(json);
-  },
-
-  delete: async (req, res) => {
-    let json = { error: "", result: {} };
-    let id_user = req.params.id_user;
-
-    if (id_user) {
-      let result = await UserService.delete(id_user);
-
-      if (result > 0) json.result = "User deleted!";
-      else json.result = "User id does not exists.";
-    } else {
-      json.error = "Invalid user id";
     }
 
     res.json(json);
