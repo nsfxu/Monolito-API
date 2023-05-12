@@ -1,4 +1,5 @@
 const UserService = require("../services/UserService.js");
+const BoardService = require("../services/BoardService.js");
 const bcrypt = require("bcrypt");
 
 module.exports = {
@@ -46,6 +47,21 @@ module.exports = {
       json.error = "Wrong user parameters";
     }
 
+    res.json(json);
+  },
+
+  getUserBoards: async (req, res) => {
+    let json = { error: "", result: [] };
+
+    const user_id = req.params.user_id;
+
+    let boards_users = await UserService.getUserBoards(user_id);
+
+    if (boards_users) {
+      json.result = boards_users;
+    } else {
+      json.error = "The current user does not have a board assigned.";
+    }
     res.json(json);
   },
 };

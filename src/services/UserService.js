@@ -36,4 +36,24 @@ module.exports = {
       );
     });
   },
+
+  getUserBoards: (user_id) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `SELECT b.id_board, b.name, b.style, bu.id_permission FROM boards b, boards_has_users bu WHERE b.id_board = bu.id_board and bu.id_user = ${user_id}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) {
+            accept(results);
+          } else {
+            accept(false);
+          }
+        }
+      );
+    });
+  },
 };
