@@ -5,7 +5,7 @@ module.exports = {
   getPwd: ({ username }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `SELECT password FROM users WHERE username = '${username}'`,
+        `SELECT * FROM users WHERE username = '${username}'`,
         (error, result) => {
           if (error) {
             reject(error);
@@ -13,7 +13,7 @@ module.exports = {
           }
 
           if (result.length > 0) {
-            accept(result[0].password);
+            accept(result[0]);
           } else {
             accept(false);
           }

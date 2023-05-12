@@ -3,22 +3,29 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
   login: async (req, res) => {
+    let json = { error: "", result: {} };
     let userObject = {
       username: req.body.username,
       password: req.body.password,
     };
 
-    let hash_pwd = await UserService.getPwd(userObject);
+    let bdUserObject = await UserService.getPwd(userObject);
 
-    if (hash_pwd) {
-      if (bcrypt.compareSync(userObject.password, hash_pwd)) {
-        res.send("Successful");
+    if (bdUserObject) {
+      if (bcrypt.compareSync(userObject.password, bdUserObject.password)) {
+        json.result = {
+          id_user: bdUserObject.id_user,
+          username: bdUserObject.username,
+          name: bdUserObject.name,
+        };
       } else {
-        res.json({ error: "Incorrect Email and/or Password!" });
+        json.error = "Incorrect Email and/or Password!";
       }
     } else {
-      res.json({ error: "Incorrect Email and/or Password!" });
+      json.error = "Incorrect Email and/or Password!";
     }
+
+    res.json(json);
   },
 
   insert: async (req, res) => {
