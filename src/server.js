@@ -13,6 +13,8 @@ const server = express();
 server.use(cors());
 server.use(bodyParser.urlencoded({ extended: false }));
 
+server.use('/monolito', routes);
+
 server.listen(process.env.API_PORT, () => {
   console.log(`\n\n\nServidor rodando em: http://localhost:${process.env.API_PORT}\n\n\n`);
 });
