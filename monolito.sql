@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `monolito`.`cards` (
   `id_group` INT NOT NULL,
   `id_user` INT NOT NULL DEFAULT 0,
   `id_swinlane` INT NULL,
-  PRIMARY KEY (`id_card`, `id_group`, `id_user`, `id_swinlane`))
+  PRIMARY KEY (`id_card`, `id_group`, `id_user`))
 ENGINE = InnoDB;
 
 
@@ -160,9 +160,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `monolito`.`cards_has_tags` ;
 
 CREATE TABLE IF NOT EXISTS `monolito`.`cards_has_tags` (
-  `cards_id_card` INT NOT NULL,
-  `tags_id_tag` INT NOT NULL,
-  PRIMARY KEY (`cards_id_card`, `tags_id_tag`))
+  `id_card` INT NOT NULL,
+  `id_tag` INT NOT NULL,
+  PRIMARY KEY (`id_card`, `id_tag`))
 ENGINE = InnoDB;
 
 --
@@ -208,10 +208,19 @@ INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('2
 INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('2', '2');
 INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('3', '4');
 
-
 INSERT INTO `monolito`.`cards` (`id_card`, `order`, `name`, `description`, `id_group`, `id_user`) VALUES ('1', '0', 'Criar banco de dados do projeto', 'Nenhuma...', '2', '1');
 INSERT INTO `monolito`.`cards` (`id_card`, `order`, `name`, `id_group`, `id_user`) VALUES ('2', '0', 'Criar API do projeto', '1', '1');
 INSERT INTO `monolito`.`cards` (`id_card`, `order`, `name`, `description`, `id_group`, `id_user`) VALUES ('3', '1', 'Conectar back-end com front-end', 'fazer isso após a criação do banco de dados / api', '1', '1');
+
+INSERT INTO `monolito`.`tags` (`id_tag`, `name`, `id_board`) VALUES ('1', 'Test', '1');
+INSERT INTO `monolito`.`tags` (`id_tag`, `name`, `id_board`) VALUES ('2', 'Pra ontem', '1');
+INSERT INTO `monolito`.`tags` (`id_tag`, `name`, `id_board`) VALUES ('3', 'Pra hoje', '1');
+
+INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('1', '1');
+INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('1', '2');
+INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('2', '1');
+INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('3', '1');
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

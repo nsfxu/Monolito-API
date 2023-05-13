@@ -1,10 +1,15 @@
+const CardService = require("../services/CardService.js");
+
 const checkIfPropertyExists = (arr, property, value) => {
   return arr.some(function (obj) {
     return obj[property] === value;
   });
 };
 
-const mountColumnAndGroupsObject = (columns_and_groups) => {
+const mountColumnGroupsCardsObject = async (
+  columns_and_groups,
+  all_group_cards
+) => {
   let result = {
     columns: [],
     nextColumnId: 0,
@@ -20,15 +25,47 @@ const mountColumnAndGroupsObject = (columns_and_groups) => {
       // find the created column
       result.columns.map((column) => {
         if (column.id == id_column) {
-          column.groups.push({ id: id_group, name: group_name, cards: [] });
+          let cards = [];
+
+          all_group_cards.map((card) => {
+            if (card.id == id_group) {
+              cards.push(card);
+            }
+          });
+
+          cards = JSON.parse(JSON.stringify(cards));
+
+          cards.map((card) => {
+            card.tags = JSON.parse(card.tags);
+          });
+
+          console.log(cards);
+
+          column.groups.push({ id: id_group, name: group_name, cards: cards });
           result.nextGroupId++;
         }
       });
     } else {
+      let cards = [];
+
+      all_group_cards.map((card) => {
+        if (card.id == id_group) {
+          cards.push(card);
+        }
+      });
+
+      cards = JSON.parse(JSON.stringify(cards));
+
+      cards.map((card) => {
+        card.tags = JSON.parse(card.tags);
+      });
+
+      console.log(cards);
+
       result.columns.push({
         id: id_column,
         name: column_name,
-        groups: [{ id: id_group, name: group_name, cards: [] }],
+        groups: [{ id: id_group, name: group_name, cards: cards }],
       });
 
       result.nextColumnId++;
@@ -39,4 +76,7 @@ const mountColumnAndGroupsObject = (columns_and_groups) => {
   return result;
 };
 
-module.exports = { checkIfPropertyExists, mountColumnAndGroupsObject };
+module.exports = {
+  checkIfPropertyExists,
+  mountColumnGroupsCardsObject,
+};

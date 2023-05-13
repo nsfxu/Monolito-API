@@ -1,4 +1,4 @@
-const BASE_DATA = {
+let BASE_DATA = {
   columns: [],
   tags: [],
   swinlanes: [],
