@@ -19,25 +19,29 @@ module.exports = {
       const columns_and_groups =
         await ColumnService.getColumnsAndGroupsByBoardId(board_id);
 
-      const all_group_cards = await CardService.getBatchOfCards(
-        columns_and_groups
-      );
-
       const all_boards_tags = await TagsService.getTagsByBoardId(board_id);
 
       if (all_boards_tags) {
         base_json.tags = JSON.parse(JSON.stringify(all_boards_tags));
+      } else {
+        base_json.tags = [];
       }
 
       const all_boards_swinlanes = await SwinlaneService.getSwinlanesByBoardId(
         board_id
       );
 
-      if(all_boards_swinlanes){
+      if (all_boards_swinlanes) {
         base_json.swinlanes = JSON.parse(JSON.stringify(all_boards_swinlanes));
+      } else {
+        base_json.swinlanes = [];
       }
 
       if (columns_and_groups) {
+        const all_group_cards = await CardService.getBatchOfCards(
+          columns_and_groups
+        );
+
         function_result = await boardInfoUtils.mountColumnGroupsCardsObject(
           columns_and_groups,
           all_group_cards
