@@ -39,8 +39,6 @@ const mountColumnGroupsCardsObject = async (
             card.tags = JSON.parse(card.tags);
           });
 
-          console.log(cards);
-
           column.groups.push({ id: id_group, name: group_name, cards: cards });
           result.nextGroupId++;
         }
@@ -59,8 +57,6 @@ const mountColumnGroupsCardsObject = async (
       cards.map((card) => {
         card.tags = JSON.parse(card.tags);
       });
-
-      console.log(cards);
 
       result.columns.push({
         id: id_column,

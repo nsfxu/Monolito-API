@@ -2,8 +2,9 @@ const BoardService = require("../services/BoardService.js");
 const ColumnService = require("../services/ColumnService.js");
 
 const boardInfoUtils = require("../utils/boardInfoUtils.js");
-const { getCardsByGroupId } = require("../services/CardService.js");
 const CardService = require("../services/CardService.js");
+const TagsService = require("../services/TagsService.js");
+const SwinlaneService = require("../services/SwinlaneService.js");
 
 module.exports = {
   getInfo: async (req, res) => {
@@ -22,6 +23,20 @@ module.exports = {
         columns_and_groups
       );
 
+      const all_boards_tags = await TagsService.getTagsByBoardId(board_id);
+
+      if (all_boards_tags) {
+        base_json.tags = JSON.parse(JSON.stringify(all_boards_tags));
+      }
+
+      const all_boards_swinlanes = await SwinlaneService.getSwinlanesByBoardId(
+        board_id
+      );
+
+      if(all_boards_swinlanes){
+        base_json.swinlanes = JSON.parse(JSON.stringify(all_boards_swinlanes));
+      }
+
       if (columns_and_groups) {
         function_result = await boardInfoUtils.mountColumnGroupsCardsObject(
           columns_and_groups,
@@ -32,6 +47,8 @@ module.exports = {
           base_json.columns = function_result.columns;
           base_json.nextColumnId = function_result.nextColumnId;
           base_json.nextGroupId = function_result.nextGroupId;
+          base_json.nextCardId = all_group_cards.length;
+          base_json.nextSwinlaneId = all_boards_swinlanes.length;
         }
       }
 

@@ -20,10 +20,10 @@ module.exports = {
           name: bdUserObject.name,
         };
       } else {
-        json.error = "Incorrect Email and/or Password!";
+        json.error = "Usuário ou senha incorretas!";
       }
     } else {
-      json.error = "Incorrect Email and/or Password!";
+      json.error = "Usuário ou senha incorretas!";
     }
 
     res.json(json);
