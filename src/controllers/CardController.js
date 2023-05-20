@@ -26,14 +26,9 @@ module.exports = {
         where = `c.order < ${cardObj.old_order} and c.order >= ${cardObj.new_order}`;
       }
 
-      const card_order_response = await CardService.updateCardsOrder(
-        set,
-        where
-      );
-      const card_update_response = await CardService.updateCardGroup(cardObj);
+      await CardService.updateCardsOrder(set, where);
 
-      console.log(card_order_response);
-      console.log(card_update_response);
+      const card_update_response = await CardService.updateCardGroup(cardObj);
 
       if (card_update_response) {
         json.result = "Card updated!";

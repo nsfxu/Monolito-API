@@ -27,17 +27,19 @@ const mountColumnGroupsCardsObject = async (
         if (column.id == id_column) {
           let cards = [];
 
-          all_group_cards.map((card) => {
-            if (card.id == id_group) {
-              cards.push(card);
-            }
-          });
+          if (all_group_cards) {
+            all_group_cards.map((card) => {
+              if (card.id_group == id_group) {
+                cards.push(card);
+              }
+            });
 
-          cards = JSON.parse(JSON.stringify(cards));
+            cards = JSON.parse(JSON.stringify(cards));
 
-          cards.map((card) => {
-            card.tags = JSON.parse(card.tags);
-          });
+            cards.map((card) => {
+              card.tags = JSON.parse(card.tags);
+            });
+          }
 
           column.groups.push({ id: id_group, name: group_name, cards: cards });
           result.nextGroupId++;
@@ -46,11 +48,12 @@ const mountColumnGroupsCardsObject = async (
     } else {
       let cards = [];
 
-      all_group_cards.map((card) => {
-        if (card.id == id_group) {
-          cards.push(card);
-        }
-      });
+      if (all_group_cards)
+        all_group_cards.map((card) => {
+          if (card.id == id_group) {
+            cards.push(card);
+          }
+        });
 
       cards = JSON.parse(JSON.stringify(cards));
 
