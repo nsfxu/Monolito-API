@@ -44,6 +44,7 @@ module.exports = {
     let json = { error: "", result: {} };
 
     let cardObj = {
+      id_card: req.body.id_card,
       name: req.body.name,
       description: req.body.description,
       style: req.body.style,
@@ -52,11 +53,10 @@ module.exports = {
       id_user: req.body.id_user,
     };
 
-    if (cardObj.name && cardObj.id_group && cardObj.id_user) {
+    if (cardObj.name && cardObj.id_group && cardObj.id_user && cardObj.id_card) {
       await CardService.updateCardsOrder("c.order = c.order + 1", `id_group = ${cardObj.id_group} and c.order >= 0`);
 
       const response = await CardService.createCard(cardObj);
-
 
       if (response) {
         json.response = cardObj;
