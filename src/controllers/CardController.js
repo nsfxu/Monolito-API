@@ -56,7 +56,7 @@ module.exports = {
     if (cardObj.name && cardObj.id_group && cardObj.id_user) {
       const response = await CardService.createCard(cardObj);
 
-      if (card_update_response) {
+      if (response) {
         json.response = cardObj;
       } else {
         json.error = "Wrong card parameters";

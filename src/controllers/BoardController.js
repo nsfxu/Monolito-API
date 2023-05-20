@@ -52,7 +52,6 @@ module.exports = {
           all_group_cards
         );
 
-
         if (function_result) {
           base_json.columns = function_result.columns;
           base_json.nextColumnId = function_result.nextColumnId;
@@ -65,6 +64,27 @@ module.exports = {
       json.result = base_json;
     } else {
       json.error = "This board does not exists";
+    }
+
+    res.json(json);
+  },
+
+  getBoardParticipants: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let id_board = req.params.board_id;
+
+    if (id_board) {
+      const response = await BoardService.getBoardParticipants(id_board);
+
+      if (response) {
+        json.result = response;
+      } else {
+        json.error = "Board has no participants or an error happened";
+      }
+
+    } else {
+      json.error = "Missing id_board on params.";
     }
 
     res.json(json);

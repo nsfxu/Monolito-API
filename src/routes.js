@@ -22,6 +22,7 @@ router.get("/user/boards/:user_id", UserController.getUserBoards);
 //#region BOARD
 
 router.get("/board/:board_id", BoardController.getInfo);
+router.get("/board/users/:board_id", BoardController.getBoardParticipants);
 
 //#endregion
 

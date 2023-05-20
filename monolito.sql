@@ -180,6 +180,8 @@ INSERT INTO `monolito`.`boards` (`id_board`, `name`) VALUES ('2', 'Tester');
 
 
 INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1', 'Unassigned', 'Sem dono', '');
+INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1337', 'usu1', 'Usuário 1', 'none');
+INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1338', 'usu2', 'Usuário 2', 'none');
 INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('2', 'admin', 'admin', '$2b$10$yJU2NBrPJcYSFpP.nsOoj.5kxA8TetS4WB24V6ZUPN12KGc.q/Kla');
 
 
