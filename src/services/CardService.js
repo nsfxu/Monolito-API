@@ -45,4 +45,22 @@ module.exports = {
       );
     });
   },
+
+  updateCardsOrder: (set, where) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE cards c SET ${set} WHERE ${where}`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          if (result.affectedRows > 0) accept(true);
+          else accept(false);
+        }
+      );
+    });
+  },
 };
