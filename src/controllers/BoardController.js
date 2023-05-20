@@ -42,10 +42,17 @@ module.exports = {
           columns_and_groups
         );
 
+        const all_cards_tags = await CardService.getBatchOfCardsTags(
+          columns_and_groups
+        );
+
         function_result = await boardInfoUtils.mountColumnGroupsCardsObject(
           columns_and_groups,
+          all_cards_tags,
           all_group_cards
         );
+
+        console.log(function_result);
 
         if (function_result) {
           base_json.columns = function_result.columns;

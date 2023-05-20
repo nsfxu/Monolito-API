@@ -8,6 +8,7 @@ const checkIfPropertyExists = (arr, property, value) => {
 
 const mountColumnGroupsCardsObject = async (
   columns_and_groups,
+  all_cards_tags,
   all_group_cards
 ) => {
   let result = {
@@ -36,9 +37,17 @@ const mountColumnGroupsCardsObject = async (
 
             cards = JSON.parse(JSON.stringify(cards));
 
-            cards.map((card) => {
-              card.tags = JSON.parse(card.tags);
-            });
+            if (all_cards_tags) {
+              cards.map((card) => {
+                const found = all_cards_tags.find(
+                  (card_tag) => card_tag.id_card == card.id
+                );
+
+                if (found) {
+                  card.tags = JSON.parse(found.tags);
+                }
+              });
+            }
           }
 
           column.groups.push({ id: id_group, name: group_name, cards: cards });
@@ -48,18 +57,27 @@ const mountColumnGroupsCardsObject = async (
     } else {
       let cards = [];
 
-      if (all_group_cards)
+      if (all_group_cards) {
         all_group_cards.map((card) => {
-          if (card.id == id_group) {
+          if (card.id_group == id_group) {
             cards.push(card);
           }
         });
 
-      cards = JSON.parse(JSON.stringify(cards));
+        cards = JSON.parse(JSON.stringify(cards));
 
-      cards.map((card) => {
-        card.tags = JSON.parse(card.tags);
-      });
+        if (all_cards_tags) {
+          cards.map((card) => {
+            const found = all_cards_tags.find(
+              (card_tag) => card_tag.id_card == card.id
+            );
+
+            if (found) {
+              card.tags = JSON.parse(found.tags);
+            }
+          });
+        }
+      }
 
       result.columns.push({
         id: id_column,
