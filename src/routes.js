@@ -27,6 +27,7 @@ router.get("/board/:board_id", BoardController.getInfo);
 
 //#region CARD
 
+router.post("/card/create", CardController.createCard);
 router.put("/card/:id_card", CardController.updateCardGroup);
 
 //#endregion

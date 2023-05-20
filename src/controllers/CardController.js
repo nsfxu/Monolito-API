@@ -12,7 +12,6 @@ module.exports = {
       id_swinlane: req.body.id_swinlane,
     };
 
-
     if (cardObj.id_card && cardObj.id_group) {
       let set = "";
       let where = "";
@@ -31,6 +30,34 @@ module.exports = {
 
       if (card_update_response) {
         json.result = "Card updated!";
+      } else {
+        json.error = "Wrong card parameters";
+      }
+    } else {
+      json.error = "Wrong card parameterse";
+    }
+
+    res.json(json);
+  },
+
+  createCard: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let cardObj = {
+      name: req.body.name,
+      description: req.body.description,
+      style: req.body.style,
+      id_group: req.body.id_group,
+      id_swinlane: req.body.id_swinlane,
+      id_user: req.body.id_user,
+      order: req.body.order,
+    };
+
+    if (cardObj.name && cardObj.id_group && cardObj.id_user) {
+      const response = await CardService.createCard(cardObj);
+
+      if (card_update_response) {
+        json.response = cardObj;
       } else {
         json.error = "Wrong card parameters";
       }

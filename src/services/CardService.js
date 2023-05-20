@@ -89,4 +89,28 @@ module.exports = {
       );
     });
   },
+
+  createCard: ({
+    name,
+    description,
+    style,
+    id_group,
+    id_swinlane,
+    id_user,
+    order,
+  }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO cards (order, description, name, style, id_group, id_user, id_swinlane)  VALUES ('${order}','${description}','${name}','${style}','${id_group}','${id_user}','${id_swinlane}')`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
 };
