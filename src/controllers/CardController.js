@@ -18,10 +18,10 @@ module.exports = {
 
       if (cardObj.old_order < cardObj.new_order) {
         set = "c.order = c.order - 1";
-        where = `c.order > ${cardObj.old_order} and c.order <= ${cardObj.new_order}`;
+        where = `id_group = ${cardObj.id_group} and c.order > ${cardObj.old_order} and c.order <= ${cardObj.new_order}`;
       } else {
         set = "c.order = c.order + 1";
-        where = `c.order < ${cardObj.old_order} and c.order >= ${cardObj.new_order}`;
+        where = `id_group = ${cardObj.id_group} and c.order < ${cardObj.old_order} and c.order >= ${cardObj.new_order}`;
       }
 
       await CardService.updateCardsOrder(set, where);
@@ -50,11 +50,13 @@ module.exports = {
       id_group: req.body.id_group,
       id_swinlane: req.body.id_swinlane,
       id_user: req.body.id_user,
-      order: req.body.order,
     };
 
     if (cardObj.name && cardObj.id_group && cardObj.id_user) {
+      await CardService.updateCardsOrder("c.order = c.order + 1", `id_group = ${cardObj.id_group} and c.order >= 0`);
+
       const response = await CardService.createCard(cardObj);
+
 
       if (response) {
         json.response = cardObj;
