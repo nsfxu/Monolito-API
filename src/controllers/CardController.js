@@ -8,6 +8,7 @@ module.exports = {
       id_card: req.params.id_card,
       order: req.body.order,
       id_group: req.body.id_group,
+      id_swinlane: req.body.id_swinlane
     };
 
     if (cardObj.id_card && cardObj.id_group && cardObj.order) {

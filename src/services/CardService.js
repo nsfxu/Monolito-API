@@ -27,11 +27,11 @@ module.exports = {
     });
   },
 
-  updateCardGroup: ({ id_card, order, id_group }) => {
+  updateCardGroup: ({ id_card, order, id_group, id_swinlane }) => {
     return new Promise((accept, reject) => {
       // UPDATE `monolito`.`cards` SET `order` = '1', `description` = 'E', `id_group` = '2' WHERE (`id_card` = '2') and (`id_group` = '1') and (`id_user` = '1');
       database.query(
-        `UPDATE cards c SET c.order = '${order}', c.id_group = '${id_group}' WHERE c.id_card = ${id_card}`,
+        `UPDATE cards c SET c.order = '${order}', c.id_group = '${id_group}', c.id_swinlane = ${id_swinlane} WHERE c.id_card = ${id_card}`,
         (error, result) => {
           if (error) {
             reject(error);
