@@ -43,8 +43,6 @@ module.exports = {
 
     userObject.password = await bcrypt.hash(userObject.password, 10);
 
-    console.log(userObject.password);
-
     if (userObject.username && userObject.name && userObject.password) {
       let result = await UserService.insert(userObject);
       json.result = result;

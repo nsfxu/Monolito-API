@@ -12,7 +12,6 @@ module.exports = {
       id_swinlane: req.body.id_swinlane,
     };
 
-    console.log(cardObj);
 
     if (cardObj.id_card && cardObj.id_group) {
       let set = "";

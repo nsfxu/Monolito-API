@@ -52,7 +52,6 @@ module.exports = {
           all_group_cards
         );
 
-        console.log(function_result);
 
         if (function_result) {
           base_json.columns = function_result.columns;
