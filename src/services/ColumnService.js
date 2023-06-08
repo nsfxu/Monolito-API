@@ -1,6 +1,25 @@
 const database = require("../db.js");
 
 module.exports = {
+  createColumn: ({ name, id_board, column_order }) => {
+    console.log(name, id_board, column_order);
+    return new Promise((accept, reject) => {
+      let orderBy = "`order`";
+
+      database.query(
+        `INSERT INTO columns (${orderBy}, name, id_board) VALUES (${column_order}, '${name}', ${id_board})`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+
   getColumnsAndGroupsByBoardId: (id_board) => {
     return new Promise((accept, reject) => {
       database.query(
@@ -16,6 +35,26 @@ module.exports = {
             accept(results);
           } else {
             accept(false);
+          }
+        }
+      );
+    });
+  },
+
+  getColumnCountByBoardId: (id_board) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `SELECT c.order FROM columns c WHERE id_board = ${id_board} ORDER BY c.order DESC LIMIT 1`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) {
+            accept(results[0].order);
+          } else {
+            accept(-1);
           }
         }
       );

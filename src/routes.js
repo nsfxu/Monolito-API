@@ -6,6 +6,7 @@ const controllers_path = "./controllers";
 const UserController = require(`${controllers_path}/UserController.js`);
 const BoardController = require(`${controllers_path}/BoardController.js`);
 const CardController = require(`${controllers_path}/CardController.js`);
+const ColumnController = require(`${controllers_path}/ColumnController.js`);
 
 //#region USERS
 
@@ -16,6 +17,11 @@ router.post("/user/login", UserController.login);
 router.get("/user/boards/:user_id", UserController.getUserBoards);
 // router.put('/user/:id_user', UserController.update);
 // router.delete('/user/:id_user', UserController.delete);
+
+//#endregion
+
+//#region COLUMN
+router.post("/column/create", ColumnController.createColumn);
 
 //#endregion
 
