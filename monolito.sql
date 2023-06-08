@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `monolito`.`boards` ;
 CREATE TABLE IF NOT EXISTS `monolito`.`boards` (
   `id_board` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL,
+  `description` LONGTEXT NULL,
   `style` JSON NULL,
   PRIMARY KEY (`id_board`))
 ENGINE = InnoDB;
@@ -40,6 +41,9 @@ CREATE TABLE IF NOT EXISTS `monolito`.`users` (
   `password` VARCHAR(125) NOT NULL,
   PRIMARY KEY (`id_user`))
 ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `username_UNIQUE` ON `monolito`.`users` (`username` ASC) VISIBLE;
+
 
 -- -----------------------------------------------------
 -- Table `monolito`.`permissions`
@@ -76,6 +80,8 @@ CREATE TABLE IF NOT EXISTS `monolito`.`columns` (
   `order` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `show_swinlane` VARCHAR(10) NOT NULL DEFAULT 'false',
+  `show_wip` VARCHAR(10) NOT NULL DEFAULT 'false',
+  `wip_limit` INT NULL,
   `style` JSON NULL,
   `id_board` INT NOT NULL,
   PRIMARY KEY (`id_column`, `id_board`))
@@ -91,6 +97,8 @@ CREATE TABLE IF NOT EXISTS `monolito`.`groups` (
   `id_group` INT NOT NULL AUTO_INCREMENT,
   `order` INT NOT NULL,
   `name` VARCHAR(50) NOT NULL,
+  `show_wip` VARCHAR(10) NOT NULL DEFAULT 'false',
+  `wip_limit` VARCHAR(45) NULL,
   PRIMARY KEY (`id_group`))
 ENGINE = InnoDB;
 
@@ -104,6 +112,21 @@ CREATE TABLE IF NOT EXISTS `monolito`.`columns_has_groups` (
   `id_column` INT NOT NULL,
   `id_group` INT NOT NULL,
   PRIMARY KEY (`id_column`, `id_group`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `monolito`.`swinlanes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `monolito`.`swinlanes` ;
+
+CREATE TABLE IF NOT EXISTS `monolito`.`swinlanes` (
+  `id_swinlane` INT NOT NULL AUTO_INCREMENT,
+  `order` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `style` JSON NULL,
+  `id_board` INT NOT NULL,
+  PRIMARY KEY (`id_swinlane`, `id_board`))
 ENGINE = InnoDB;
 
 
@@ -122,21 +145,6 @@ CREATE TABLE IF NOT EXISTS `monolito`.`cards` (
   `id_user` INT NOT NULL DEFAULT 0,
   `id_swinlane` INT NULL,
   PRIMARY KEY (`id_card`, `id_group`, `id_user`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `monolito`.`swinlanes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `monolito`.`swinlanes` ;
-
-CREATE TABLE IF NOT EXISTS `monolito`.`swinlanes` (
-  `id_swinlane` INT NOT NULL AUTO_INCREMENT,
-  `order` INT NOT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `style` JSON NULL,
-  `id_board` INT NOT NULL,
-  PRIMARY KEY (`id_swinlane`, `id_board`))
 ENGINE = InnoDB;
 
 
@@ -164,6 +172,11 @@ CREATE TABLE IF NOT EXISTS `monolito`.`cards_has_tags` (
   `id_tag` INT NOT NULL,
   PRIMARY KEY (`id_card`, `id_tag`))
 ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 --
 -- SELECTS
