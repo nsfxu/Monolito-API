@@ -27,6 +27,8 @@ module.exports = {
           name: "Doing",
         });
 
+        columnObj.id_group = group_response.insertId;
+
         await GroupService.linkGroupWithBoardId(
           columnObj.id_column,
           group_response.insertId
