@@ -7,6 +7,36 @@ const TagsService = require("../services/TagsService.js");
 const SwinlaneService = require("../services/SwinlaneService.js");
 
 module.exports = {
+  create: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    const boardObj = {
+      id_user: req.body.id_user,
+      name: req.body.name,
+      description: req.body.description,
+    };
+
+    if (boardObj.id_user && boardObj.name && boardObj.description) {
+      const board_response = await BoardService.createBoard(boardObj);
+console.log(board_response.insertId)
+      const response = await BoardService.addUserToBoard(
+        board_response.insertId,
+        boardObj.id_user,
+        1
+      );
+
+      if (response) {
+        json.response = boardObj;
+      } else {
+        json.error = "Wrong card parameters";
+      }
+    } else {
+      json.error = "Wrong card parameters";
+    }
+
+    res.json(json);
+  },
+
   getInfo: async (req, res) => {
     let json = { error: "", result: {} };
     let base_json = { ...require("../constants/base_board_info.js") };
@@ -82,7 +112,6 @@ module.exports = {
       } else {
         json.error = "Board has no participants or an error happened";
       }
-
     } else {
       json.error = "Missing id_board on params.";
     }

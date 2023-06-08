@@ -1,6 +1,37 @@
 const database = require("../db.js");
 
 module.exports = {
+  createBoard: ({ id_user, name, description }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO boards (name, description) VALUES ('${name}', '${description}')`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+  addUserToBoard: (board_id, id_user, id_permission) => {
+    console.log()
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${id_user}, ${id_permission})`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
   getBoardsBatch: (ids_boards) => {
     return new Promise((accept, reject) => {
       database.query(

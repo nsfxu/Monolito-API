@@ -64,7 +64,7 @@ module.exports = {
         json.error = "Wrong card parameters";
       }
     } else {
-      json.error = "Wrong card parameterse";
+      json.error = "Wrong card parameters";
     }
 
     res.json(json);
