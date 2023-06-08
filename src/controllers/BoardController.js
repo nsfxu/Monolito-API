@@ -18,7 +18,7 @@ module.exports = {
 
     if (boardObj.id_user && boardObj.name && boardObj.description) {
       const board_response = await BoardService.createBoard(boardObj);
-console.log(board_response.insertId)
+
       const response = await BoardService.addUserToBoard(
         board_response.insertId,
         boardObj.id_user,
@@ -26,7 +26,7 @@ console.log(board_response.insertId)
       );
 
       if (response) {
-        json.response = boardObj;
+        json.result = boardObj;
       } else {
         json.error = "Wrong card parameters";
       }

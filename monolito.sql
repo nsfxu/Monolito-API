@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `monolito`.`boards` ;
 
 CREATE TABLE IF NOT EXISTS `monolito`.`boards` (
   `id_board` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NULL,
+  `name` VARCHAR(100) NOT NULL,
   `description` LONGTEXT NULL,
   `style` JSON NULL,
   PRIMARY KEY (`id_board`))
