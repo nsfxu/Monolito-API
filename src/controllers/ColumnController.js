@@ -44,4 +44,32 @@ module.exports = {
 
     res.json(json);
   },
+
+  updateColumn: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let columnObj = {
+      id_column: req.params.id_column,
+      name: req.body.name,
+      show_swinlane: req.body.show_swinlane,
+      show_wip: req.body.show_wip,
+      wip_limit: req.body.wip_limit,
+    };
+
+    console.log(columnObj);
+
+    if (columnObj.id_column) {
+      const response = await ColumnService.updateColumnInfo(columnObj);
+
+      if (response) {
+        json.result = columnObj;
+      } else {
+        json.error = "Wrong card parameters";
+      }
+    } else {
+      json.error = "Wrong card parameters";
+    }
+
+    res.json(json);
+  },
 };
