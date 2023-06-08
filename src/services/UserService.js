@@ -40,7 +40,7 @@ module.exports = {
   getUserBoards: (user_id) => {
     return new Promise((accept, reject) => {
       database.query(
-        `SELECT b.id_board, b.name, b.style, bu.id_permission FROM boards b, boards_has_users bu WHERE b.id_board = bu.id_board and bu.id_user = ${user_id}`,
+        `SELECT b.id_board, b.name, b.description, b.style, bu.id_permission FROM boards b, boards_has_users bu WHERE b.id_board = bu.id_board and bu.id_user = ${user_id}`,
         (error, results) => {
           if (error) {
             reject(error);
