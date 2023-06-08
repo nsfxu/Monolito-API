@@ -13,10 +13,10 @@ module.exports = {
     const boardObj = {
       id_user: req.body.id_user,
       name: req.body.name,
-      description: req.body.description,
+      description: req.body.description ? req.body.description : "",
     };
 
-    if (boardObj.id_user && boardObj.name && boardObj.description) {
+    if (boardObj.id_user && boardObj.name) {
       const board_response = await BoardService.createBoard(boardObj);
 
       const response = await BoardService.addUserToBoard(
