@@ -38,6 +38,24 @@ module.exports = {
     });
   },
 
+  updateColumnOrder: (id_column, order) => {
+    return new Promise((accept, reject) => {
+      let orderBy = "`order`";
+
+      database.query(
+        `UPDATE columns SET ${orderBy} = ${order} WHERE id_column = ${id_column}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+
   getColumnsAndGroupsByBoardId: (id_board) => {
     return new Promise((accept, reject) => {
       database.query(

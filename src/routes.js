@@ -21,6 +21,7 @@ router.get("/user/boards/:user_id", UserController.getUserBoards);
 //#endregion
 
 //#region COLUMN
+router.put("/column/order/:id_board", ColumnController.updateOrder);
 router.post("/column/create", ColumnController.createColumn);
 router.put("/column/:id_column", ColumnController.updateColumn);
 

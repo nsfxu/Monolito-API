@@ -91,7 +91,6 @@ module.exports = {
   },
 
   createCard: ({
-    id_card,
     name,
     description,
     style,
@@ -102,7 +101,7 @@ module.exports = {
     let orderBy = "`order`";
     return new Promise((accept, reject) => {
       database.query(
-        `INSERT INTO cards (id_card, ${orderBy}, description, name, style, id_group, id_user, id_swinlane)  VALUES (${id_card},0,'${description}','${name}',${style},${id_group},${id_user},${id_swinlane})`,
+        `INSERT INTO cards (${orderBy}, description, name, style, id_group, id_user, id_swinlane)  VALUES (0,'${description}','${name}',${style},${id_group},${id_user},${id_swinlane})`,
         (error, results) => {
           if (error) {
             reject(error);

@@ -72,4 +72,27 @@ module.exports = {
 
     res.json(json);
   },
+
+  updateOrder: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let columnObj = {
+      id_board: req.params.id_board,
+      columns: req.body.columns,
+    };
+
+    console.log(columnObj);
+
+    if (columnObj.id_board && columnObj.columns) {
+      columnObj.columns.map(async (column, index) => {
+        await ColumnService.updateColumnOrder(column.id, index);
+      });
+
+      json.result = columnObj;
+    } else {
+      json.error = "Wrong card parameters";
+    }
+
+    res.json(json);
+  },
 };

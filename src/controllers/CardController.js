@@ -53,13 +53,14 @@ module.exports = {
       id_user: req.body.id_user,
     };
 
-    if (cardObj.name && cardObj.id_group && cardObj.id_user && cardObj.id_card) {
+    if (cardObj.name && cardObj.id_group && cardObj.id_user) {
       await CardService.updateCardsOrder("c.order = c.order + 1", `id_group = ${cardObj.id_group} and c.order >= 0`);
 
       const response = await CardService.createCard(cardObj);
 
       if (response) {
-        json.response = cardObj;
+        cardObj.id_card = response.insertId;
+        json.result = cardObj;
       } else {
         json.error = "Wrong card parameters";
       }
