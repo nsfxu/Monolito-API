@@ -32,6 +32,7 @@ router.delete("/group/:id_group", GroupController.deleteGroup);
 router.put("/column/order/:id_board", ColumnController.updateOrder);
 router.post("/column/create", ColumnController.createColumn);
 router.put("/column/:id_column", ColumnController.updateColumn);
+router.delete("/column/:id_column", ColumnController.deleteColumn);
 
 //#endregion
 

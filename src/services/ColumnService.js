@@ -36,6 +36,38 @@ module.exports = {
     });
   },
 
+  deleteColumn: (id_column) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from columns WHERE id_column = ${id_column}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
+
+  deleteColumnLinks: (id_column) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from columns_has_groups WHERE id_column = ${id_column}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
+
   updateColumnOrder: (id_column, order) => {
     return new Promise((accept, reject) => {
       let orderBy = "`order`";

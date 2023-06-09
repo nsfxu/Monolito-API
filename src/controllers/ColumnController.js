@@ -73,6 +73,24 @@ module.exports = {
     res.json(json);
   },
 
+  deleteColumn: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    const id_column = req.params.id_column;
+
+    if (id_column) {
+      const column_result = await ColumnService.deleteColumn(id_column);
+      const link_result = await ColumnService.deleteColumnLinks(id_column);
+
+      if (column_result > 0 && link_result > 0) json.result = "Column deleted.";
+      else json.result = "Column id does not exists.";
+    } else {
+      json.error = "Invalid column id";
+    }
+
+    res.json(json);
+  },
+
   updateOrder: async (req, res) => {
     let json = { error: "", result: {} };
 
