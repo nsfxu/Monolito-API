@@ -7,6 +7,7 @@ const UserController = require(`${controllers_path}/UserController.js`);
 const BoardController = require(`${controllers_path}/BoardController.js`);
 const CardController = require(`${controllers_path}/CardController.js`);
 const ColumnController = require(`${controllers_path}/ColumnController.js`);
+const GroupController = require(`${controllers_path}/GroupController.js`);
 
 //#region USERS
 
@@ -17,6 +18,12 @@ router.post("/user/login", UserController.login);
 router.get("/user/boards/:user_id", UserController.getUserBoards);
 // router.put('/user/:id_user', UserController.update);
 // router.delete('/user/:id_user', UserController.delete);
+
+//#endregion
+
+//#region GROUP
+router.post("/group/create", GroupController.createGroup);
+router.delete("/group/:id_group", GroupController.deleteGroup);
 
 //#endregion
 
