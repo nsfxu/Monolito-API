@@ -20,6 +20,23 @@ module.exports = {
     });
   },
 
+  updateGroupInfo: ({ id_group, name }) => {
+    return new Promise((accept, reject) => {
+      const groups = "`groups`";
+      database.query(
+        `UPDATE ${groups} SET name = '${name}' WHERE id_group = ${id_group}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+
   deleteGroup: (id_group) => {
     return new Promise((accept, reject) => {
       const groups = "`groups`";

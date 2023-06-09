@@ -23,6 +23,7 @@ router.get("/user/boards/:user_id", UserController.getUserBoards);
 
 //#region GROUP
 router.post("/group/create", GroupController.createGroup);
+router.put("/group/:id_group", GroupController.updateGroup);
 router.delete("/group/:id_group", GroupController.deleteGroup);
 
 //#endregion

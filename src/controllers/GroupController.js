@@ -58,29 +58,26 @@ module.exports = {
     res.json(json);
   },
 
-  updateColumn: async (req, res) => {
+  updateGroup: async (req, res) => {
     let json = { error: "", result: {} };
 
-    let columnObj = {
-      id_column: req.params.id_column,
+    let groupObj = {
+      id_group: req.params.id_group,
       name: req.body.name,
-      show_swinlane: req.body.show_swinlane,
-      show_wip: req.body.show_wip,
-      wip_limit: req.body.wip_limit,
+      // show_wip: req.body.show_wip ? req.body.show_wip : false,
+      // wip_limit: req.body.wip_limit ? req.body.wip_limit : null,
     };
 
-    console.log(columnObj);
-
-    if (columnObj.id_column) {
-      const response = await ColumnService.updateColumnInfo(columnObj);
+    if (groupObj.id_group) {
+      const response = await GroupService.updateGroupInfo(groupObj);
 
       if (response) {
-        json.result = columnObj;
+        json.result = groupObj;
       } else {
-        json.error = "Wrong card parameters";
+        json.error = "Wrong group parameters";
       }
     } else {
-      json.error = "Wrong card parameters";
+      json.error = "Wrong group parameters";
     }
 
     res.json(json);
