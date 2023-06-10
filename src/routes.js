@@ -8,6 +8,7 @@ const BoardController = require(`${controllers_path}/BoardController.js`);
 const CardController = require(`${controllers_path}/CardController.js`);
 const ColumnController = require(`${controllers_path}/ColumnController.js`);
 const GroupController = require(`${controllers_path}/GroupController.js`);
+const SwinlaneController = require(`${controllers_path}/SwinlaneController.js`);
 
 //#region ROUTE NAMES
 const userRoute = "user";
@@ -63,8 +64,8 @@ router.put(`/${cardRoute}/:id_card`, CardController.updateCardGroup);
 
 //#region SWINLANE
 
-router.post(`/${swinlaneRoute}/create`, CardController.createCard);
-router.put(`/${swinlaneRoute}/:id_card`, CardController.updateCardGroup);
+router.post(`/${swinlaneRoute}/create`, SwinlaneController.createSwinlane);
+// router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
 
 //#endregion
 
