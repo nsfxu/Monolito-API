@@ -9,46 +9,62 @@ const CardController = require(`${controllers_path}/CardController.js`);
 const ColumnController = require(`${controllers_path}/ColumnController.js`);
 const GroupController = require(`${controllers_path}/GroupController.js`);
 
-//#region USERS
+//#region ROUTE NAMES
+const userRoute = "user";
+const groupRoute = "group";
+const columnRoute = "column";
+const boardRoute = "board";
+const cardRoute = "card";
+const swinlaneRoute = "swinlane";
 
+//#endregion
+
+//#region USERS
 // router.get('/users', UserController.getAll);
 // router.get('/user/:id_user', UserController.getUser);
-router.post("/user/create", UserController.createUser);
-router.post("/user/login", UserController.login);
-router.get("/user/boards/:user_id", UserController.getUserBoards);
+router.post(`/${userRoute}/create`, UserController.createUser);
+router.post(`/${userRoute}/login`, UserController.login);
+router.get(`/${userRoute}/boards/:user_id`, UserController.getUserBoards);
 // router.put('/user/:id_user', UserController.update);
 // router.delete('/user/:id_user', UserController.delete);
 
 //#endregion
 
 //#region GROUP
-router.post("/group/create", GroupController.createGroup);
-router.put("/group/:id_group", GroupController.updateGroup);
-router.delete("/group/:id_group", GroupController.deleteGroup);
+router.post(`/${groupRoute}/create`, GroupController.createGroup);
+router.put(`/${groupRoute}/:id_group`, GroupController.updateGroup);
+router.delete(`/${groupRoute}/:id_group`, GroupController.deleteGroup);
 
 //#endregion
 
 //#region COLUMN
-router.put("/column/order/:id_board", ColumnController.updateOrder);
-router.post("/column/create", ColumnController.createColumn);
-router.put("/column/:id_column", ColumnController.updateColumn);
-router.delete("/column/:id_column", ColumnController.deleteColumn);
+router.put(`/${columnRoute}/order/:id_board`, ColumnController.updateOrder);
+router.post(`/${columnRoute}/create`, ColumnController.createColumn);
+router.put(`/${columnRoute}/:id_column`, ColumnController.updateColumn);
+router.delete(`/${columnRoute}/:id_column`, ColumnController.deleteColumn);
 
 //#endregion
 
 //#region BOARD
 
-router.post("/board/create", BoardController.create);
-// router.get("/board/:board_id", BoardController.getInfo);
-router.get("/board/:board_id", BoardController.getInfoV2);
-router.get("/board/users/:board_id", BoardController.getBoardParticipants);
+router.post(`/${boardRoute}/create`, BoardController.create);
+// router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
+router.get(`/${boardRoute}/:board_id`, BoardController.getInfoV2);
+router.get(`/${boardRoute}/users/:board_id`, BoardController.getBoardParticipants);
 
 //#endregion
 
 //#region CARD
 
-router.post("/card/create", CardController.createCard);
-router.put("/card/:id_card", CardController.updateCardGroup);
+router.post(`/${cardRoute}/create`, CardController.createCard);
+router.put(`/${cardRoute}/:id_card`, CardController.updateCardGroup);
+
+//#endregion
+
+//#region SWINLANE
+
+router.post(`/${swinlaneRoute}/create`, CardController.createCard);
+router.put(`/${swinlaneRoute}/:id_card`, CardController.updateCardGroup);
 
 //#endregion
 
