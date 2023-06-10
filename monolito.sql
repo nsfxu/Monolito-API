@@ -142,9 +142,9 @@ CREATE TABLE IF NOT EXISTS `monolito`.`cards` (
   `name` VARCHAR(45) NOT NULL,
   `style` JSON NULL,
   `id_group` INT NOT NULL,
-  `id_user` INT NOT NULL DEFAULT 0,
+  `id_user` INT NULL DEFAULT 0,
   `id_swinlane` INT NULL,
-  PRIMARY KEY (`id_card`, `id_group`, `id_user`))
+  PRIMARY KEY (`id_card`, `id_group`))
 ENGINE = InnoDB;
 
 

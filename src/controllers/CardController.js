@@ -53,7 +53,7 @@ module.exports = {
       id_user: req.body.id_user,
     };
 
-    if (cardObj.name && cardObj.id_group && cardObj.id_user) {
+    if (cardObj.name && cardObj.id_group) {
       await CardService.updateCardsOrder("c.order = c.order + 1", `id_group = ${cardObj.id_group} and c.order >= 0`);
 
       const response = await CardService.createCard(cardObj);
