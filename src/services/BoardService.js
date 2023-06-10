@@ -17,7 +17,7 @@ module.exports = {
     });
   },
   addUserToBoard: (board_id, id_user, id_permission) => {
-    console.log()
+    console.log();
     return new Promise((accept, reject) => {
       database.query(
         `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${id_user}, ${id_permission})`,
@@ -28,6 +28,22 @@ module.exports = {
           }
 
           accept(results);
+        }
+      );
+    });
+  },
+  getAllColumnsFromBoard: (id_board) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `SELECT * FROM columns WHERE id_board = ${id_board}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) accept(results);
+          else accept(false);
         }
       );
     });

@@ -93,7 +93,12 @@ const mountColumnGroupsCardsObject = async (
   return result;
 };
 
+const changeBracketsToParenthesis = (arr) => {
+  return "(" + arr.join(",") + ")";
+};
+
 module.exports = {
   checkIfPropertyExists,
   mountColumnGroupsCardsObject,
+  changeBracketsToParenthesis,
 };

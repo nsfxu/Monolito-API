@@ -113,4 +113,21 @@ module.exports = {
       );
     });
   },
+
+  getCardsByGroupsIds: (id_groups) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `SELECT * FROM cards c WHERE id_group in ${id_groups} ORDER BY c.order`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) accept(results);
+          else accept(false);
+        }
+      );
+    });
+  },
 };

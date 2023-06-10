@@ -40,6 +40,7 @@ router.delete("/column/:id_column", ColumnController.deleteColumn);
 
 router.post("/board/create", BoardController.create);
 router.get("/board/:board_id", BoardController.getInfo);
+router.get("/board/v2/:board_id", BoardController.getInfoV2);
 router.get("/board/users/:board_id", BoardController.getBoardParticipants);
 
 //#endregion

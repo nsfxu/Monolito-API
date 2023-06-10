@@ -106,4 +106,22 @@ module.exports = {
       );
     });
   },
+
+  getGroupsByColumnsIds: (id_columns) => {
+    return new Promise((accept, reject) => {
+      const groups = "`groups`";
+      database.query(
+        `SELECT * FROM ${groups} g, columns_has_groups chg WHERE g.id_group = chg.id_group AND chg.id_column in ${id_columns}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) accept(results);
+          else accept(false);
+        }
+      );
+    });
+  },
 };

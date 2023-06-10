@@ -4,7 +4,7 @@ module.exports = {
   getTagsByBoardId: (id_board) => {
     return new Promise((accept, reject) => {
       database.query(
-        `SELECT t.id_tag, t.name, t.style FROM tags t WHERE t.id_board = ${id_board}`,
+        `SELECT * FROM tags WHERE id_board = ${id_board}`,
         (error, results) => {
           if (error) {
             reject(error);
