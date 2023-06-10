@@ -100,5 +100,5 @@ const changeBracketsToParenthesis = (arr) => {
 module.exports = {
   checkIfPropertyExists,
   mountColumnGroupsCardsObject,
-  changeBracketsToParenthesis,
+  changeBracketsToParenthesis
 };

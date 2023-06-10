@@ -68,8 +68,8 @@ module.exports = {
         base_json.columns.push({
           id: this_column.id_column,
           name: this_column.name,
-          showSwinLanes: this_column.show_swinlane,
-          showWip: this_column.show_wip,
+          showSwinLanes: this_column.show_swinlane === "true",
+          showWip: this_column.show_wip === "true",
           style: this_column.style,
           groups: [],
         });
