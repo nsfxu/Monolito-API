@@ -41,7 +41,11 @@ module.exports = {
 
   getInfoV2: async (req, res) => {
     const json = { error: "", result: {} };
-    const base_json = { ...require("../constants/base_board_info.js") };
+    const base_json = {
+      columns: [],
+      tags: [],
+      swinlanes: [],
+    };
 
     const board_id = req.params.board_id;
 
@@ -53,6 +57,7 @@ module.exports = {
     }
 
     const all_columns = await BoardService.getAllColumnsFromBoard(board_id);
+
     let all_columns_ids = [];
 
     // list all columns into base json
