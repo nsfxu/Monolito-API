@@ -1,6 +1,39 @@
 const TagsService = require("../services/TagsService.js");
 
 module.exports = {
+  updateCardTags: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    const tagObj = {
+      id_card: req.params.id_card,
+      all_tags_ids: req.body.all_tags_ids,
+    };
+
+    if (tagObj.id_card && tagObj.all_tags_ids) {
+
+      await TagsService.deleteAllLinksByCardId(tagObj.id_card);
+      
+      let values_query = "";
+
+      tagObj.all_tags_ids.map((id_tag) => {
+        values_query += `(${tagObj.id_card}, ${id_tag}),`;
+      });
+
+      values_query = values_query.substring(0, values_query.length - 1);
+
+      const response = await TagsService.assignTagsToCard(values_query);
+
+      if (response.affectedRows > 0) {
+        json.result = tagObj;
+      }
+    }
+    else{
+      json.error = "Wrong tag parameters."
+    }
+
+    res.json(json);
+  },
+
   createGroup: async (req, res) => {
     let json = { error: "", result: {} };
 

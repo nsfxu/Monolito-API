@@ -20,4 +20,34 @@ module.exports = {
       );
     });
   },
+  assignTagsToCard: (values) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO cards_has_tags (id_card, id_tag) VALUES ${values}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+  deleteAllLinksByCardId: (id_card) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from cards_has_tags WHERE id_card = ${id_card}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
 };

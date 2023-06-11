@@ -9,6 +9,7 @@ const CardController = require(`${controllers_path}/CardController.js`);
 const ColumnController = require(`${controllers_path}/ColumnController.js`);
 const GroupController = require(`${controllers_path}/GroupController.js`);
 const SwinlaneController = require(`${controllers_path}/SwinlaneController.js`);
+const TagsController = require(`${controllers_path}/TagsController.js`);
 
 //#region ROUTE NAMES
 const userRoute = "user";
@@ -17,6 +18,7 @@ const columnRoute = "column";
 const boardRoute = "board";
 const cardRoute = "card";
 const swinlaneRoute = "swinlane";
+const tagsRoute = "tags";
 
 //#endregion
 
@@ -51,7 +53,10 @@ router.delete(`/${columnRoute}/:id_column`, ColumnController.deleteColumn);
 router.post(`/${boardRoute}/create`, BoardController.create);
 // router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
 router.get(`/${boardRoute}/:board_id`, BoardController.getInfoV2);
-router.get(`/${boardRoute}/users/:board_id`, BoardController.getBoardParticipants);
+router.get(
+  `/${boardRoute}/users/:board_id`,
+  BoardController.getBoardParticipants
+);
 
 //#endregion
 
@@ -65,6 +70,14 @@ router.put(`/${cardRoute}/:id_card`, CardController.updateCardGroup);
 //#region SWINLANE
 
 router.post(`/${swinlaneRoute}/create`, SwinlaneController.createSwinlane);
+// router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
+
+//#endregion
+
+//#region TAGS
+
+// router.post(`/${tagsRoute}/create`, TagsController.createTag);
+router.post(`/${tagsRoute}/card/:id_card`, TagsController.updateCardTags);
 // router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
 
 //#endregion
