@@ -44,6 +44,7 @@ module.exports = {
       columns: [],
       tags: [],
       swinlanes: [],
+      card_tags: [],
     };
 
     const board_id = req.params.board_id;
@@ -113,11 +114,15 @@ module.exports = {
 
         const all_cards = await CardService.getCardsByGroupsIds(all_groups_ids);
 
+        let all_cards_ids = [];
+
         if (all_cards) {
           base_json.columns.map((current_column) => {
             current_column.groups.map((current_group) => {
               all_cards.map((this_card) => {
                 if (current_group.id == this_card.id_group) {
+                  all_cards_ids.push(this_card.id_card);
+
                   current_group.cards.push({
                     id: this_card.id_card,
                     id_group: this_card.id_group,
@@ -131,6 +136,17 @@ module.exports = {
               });
             });
           });
+        }
+
+        all_cards_ids =
+          boardInfoUtils.changeBracketsToParenthesis(all_cards_ids);
+
+        const all_card_tags = await TagsService.getCardTagsByIdsCard(
+          all_cards_ids
+        );
+
+        if (all_card_tags) {
+          base_json.card_tags = all_card_tags;
         }
       }
     }
