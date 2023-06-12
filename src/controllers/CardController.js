@@ -54,12 +54,56 @@ module.exports = {
     };
 
     if (cardObj.name && cardObj.id_group) {
-      await CardService.updateCardsOrder("c.order = c.order + 1", `id_group = ${cardObj.id_group} and c.order >= 0`);
+      await CardService.updateCardsOrder(
+        "c.order = c.order + 1",
+        `id_group = ${cardObj.id_group} and c.order >= 0`
+      );
 
       const response = await CardService.createCard(cardObj);
 
       if (response) {
         cardObj.id_card = response.insertId;
+        json.result = cardObj;
+      } else {
+        json.error = "Wrong card parameters";
+      }
+    } else {
+      json.error = "Wrong card parameters";
+    }
+
+    res.json(json);
+  },
+
+  updateCard: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let cardObj = {
+      id_card: req.params.id_card,
+      name: req.body.name,
+      description: req.body.description,
+      id_user: req.body.id_user,
+      id_column: req.body.id_column,
+      id_group: req.body.id_group,
+      id_swinlane: req.body.id_swinlane,
+      tags: req.body.ids_tags,
+      style: req.body.style,
+    };
+
+    if (
+      cardObj.id_card &&
+      cardObj.name &&
+      cardObj.id_user &&
+      cardObj.id_column &&
+      cardObj.id_group &&
+      cardObj.id_swinlane
+    ) {
+      cardObj.tags = cardObj.tags ? cardObj.tags : [];
+      cardObj.style = cardObj.style ? cardObj.style : null;
+      cardObj.description = cardObj.description ? cardObj.description : null;
+
+      const card_result = await CardService.updateCard(cardObj);
+
+      if (card_result) {
         json.result = cardObj;
       } else {
         json.error = "Wrong card parameters";
