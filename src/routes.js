@@ -78,7 +78,7 @@ router.post(`/${swinlaneRoute}/create`, SwinlaneController.createSwinlane);
 //#region TAGS
 
 // router.post(`/${tagsRoute}/create`, TagsController.createTag);
-router.post(`/${tagsRoute}/card/:id_card`, TagsController.updateCardTags);
+router.put(`/${tagsRoute}/card/:id_card`, TagsController.updateCardTags);
 // router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
 
 //#endregion
