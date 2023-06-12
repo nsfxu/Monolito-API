@@ -114,15 +114,15 @@ module.exports = {
   deleteCard: async (req, res) => {
     let json = { error: "", result: {} };
 
-    const id_swinlane = req.params.id_swinlane;
+    const id_card = req.params.id_card;
 
-    if (id_swinlane) {
-      const swinlane_result = await SwinlaneService.deleteSwinlane(id_swinlane);
+    if (id_card) {
+      const card_result = await CardService.deleteCard(id_card);
 
-      if (swinlane_result > 0) json.result = "Swinlane deleted.";
-      else json.result = "Swinlane id does not exists.";
+      if (card_result > 0) json.result = "Card deleted.";
+      else json.result = "Card id does not exists.";
     } else {
-      json.error = "Invalid swinlane id";
+      json.error = "Invalid card id";
     }
 
     res.json(json);

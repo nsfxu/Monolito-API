@@ -140,6 +140,22 @@ module.exports = {
     });
   },
 
+  deleteCard: (id_card) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from cards WHERE id_card = ${id_card}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
+
   getCardsByGroupsIds: (id_groups) => {
     return new Promise((accept, reject) => {
       database.query(
