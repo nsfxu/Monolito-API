@@ -110,7 +110,7 @@ module.exports = {
     );
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE cards SET 'name' = '${name}', 'description' = '${description}', 'style' = ${style}, 'id_group' = ${id_group}, 'id_user' = ${id_user}, 'id_swinlane' = ${id_swinlane} WHERE ('id_card' = ${id_card}) AND ('id_group' = ${id_group})`,
+        `UPDATE cards SET name = '${name}', description = "${description}", style = ${style}, id_group = ${id_group}, id_user = ${id_user}, id_swinlane = ${id_swinlane} WHERE (id_card = ${id_card})`,
         (error, result) => {
           if (error) {
             reject(error);

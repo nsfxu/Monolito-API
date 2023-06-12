@@ -82,10 +82,8 @@ module.exports = {
       name: req.body.name,
       description: req.body.description,
       id_user: req.body.id_user,
-      id_column: req.body.id_column,
       id_group: req.body.id_group,
       id_swinlane: req.body.id_swinlane,
-      tags: req.body.ids_tags,
       style: req.body.style,
     };
 
@@ -93,11 +91,9 @@ module.exports = {
       cardObj.id_card &&
       cardObj.name &&
       cardObj.id_user &&
-      cardObj.id_column &&
       cardObj.id_group &&
       cardObj.id_swinlane
     ) {
-      cardObj.tags = cardObj.tags ? cardObj.tags : [];
       cardObj.style = cardObj.style ? cardObj.style : null;
       cardObj.description = cardObj.description ? cardObj.description : null;
 
