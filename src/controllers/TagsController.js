@@ -10,9 +10,8 @@ module.exports = {
     };
 
     if (tagObj.id_card && tagObj.all_tags_ids) {
-
       await TagsService.deleteAllLinksByCardId(tagObj.id_card);
-      
+
       let values_query = "";
 
       tagObj.all_tags_ids.map((id_tag) => {
@@ -26,9 +25,8 @@ module.exports = {
       if (response.affectedRows > 0) {
         json.result = tagObj;
       }
-    }
-    else{
-      json.error = "Wrong tag parameters."
+    } else {
+      json.error = "Wrong tag parameters.";
     }
 
     res.json(json);
@@ -123,8 +121,6 @@ module.exports = {
       id_board: req.params.id_board,
       columns: req.body.columns,
     };
-
-    console.log(columnObj);
 
     if (columnObj.id_board && columnObj.columns) {
       columnObj.columns.map(async (column, index) => {

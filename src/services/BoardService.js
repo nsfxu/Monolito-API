@@ -17,7 +17,6 @@ module.exports = {
     });
   },
   addUserToBoard: (board_id, id_user, id_permission) => {
-    console.log();
     return new Promise((accept, reject) => {
       database.query(
         `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${id_user}, ${id_permission})`,

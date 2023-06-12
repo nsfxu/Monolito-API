@@ -2,7 +2,6 @@ const database = require("../db.js");
 
 module.exports = {
   createColumn: ({ name, id_board, column_order }) => {
-    console.log(name, id_board, column_order);
     return new Promise((accept, reject) => {
       let orderBy = "`order`";
 

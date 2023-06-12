@@ -65,6 +65,7 @@ router.get(
 router.post(`/${cardRoute}/create`, CardController.createCard);
 router.put(`/${cardRoute}/:id_card`, CardController.updateCardGroup);
 router.put(`/${cardRoute}/edit/:id_card`, CardController.updateCard);
+router.delete(`/${cardRoute}/:id_card`, CardController.deleteCard);
 
 //#endregion
 

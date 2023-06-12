@@ -99,15 +99,6 @@ module.exports = {
     id_swinlane,
     id_card,
   }) => {
-    console.log(
-      name,
-      description,
-      style,
-      id_group,
-      id_user,
-      id_swinlane,
-      id_card
-    );
     return new Promise((accept, reject) => {
       database.query(
         `UPDATE cards SET name = '${name}', description = "${description}", style = ${style}, id_group = ${id_group}, id_user = ${id_user}, id_swinlane = ${id_swinlane} WHERE (id_card = ${id_card})`,

@@ -56,8 +56,6 @@ module.exports = {
       wip_limit: req.body.wip_limit,
     };
 
-    console.log(columnObj);
-
     if (columnObj.id_column) {
       const response = await ColumnService.updateColumnInfo(columnObj);
 
@@ -98,8 +96,6 @@ module.exports = {
       id_board: req.params.id_board,
       columns: req.body.columns,
     };
-
-    console.log(columnObj);
 
     if (columnObj.id_board && columnObj.columns) {
       columnObj.columns.map(async (column, index) => {

@@ -88,8 +88,6 @@ module.exports = {
       columns: req.body.columns,
     };
 
-    console.log(columnObj);
-
     if (columnObj.id_board && columnObj.columns) {
       columnObj.columns.map(async (column, index) => {
         await ColumnService.updateColumnOrder(column.id, index);
