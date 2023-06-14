@@ -173,6 +173,7 @@ module.exports = {
           id: this_swinlane.id_swinlane,
           name: this_swinlane.name,
           style: this_swinlane.style,
+          expanded: true,
         });
       });
     }
