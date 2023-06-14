@@ -87,12 +87,13 @@ module.exports = {
       style: req.body.style,
     };
 
+    console.log(cardObj);
+
     if (
       cardObj.id_card &&
       cardObj.name &&
       cardObj.id_user &&
-      cardObj.id_group &&
-      cardObj.id_swinlane
+      cardObj.id_group
     ) {
       cardObj.style = cardObj.style ? cardObj.style : null;
       cardObj.description = cardObj.description ? cardObj.description : null;
