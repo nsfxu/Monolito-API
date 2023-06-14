@@ -121,6 +121,17 @@ module.exports = {
             current_column.groups.map((current_group) => {
               all_cards.map((this_card) => {
                 if (current_group.id == this_card.id_group) {
+                  const creationDate = new Date(this_card.creationDate);
+                  const formattedDate = creationDate
+                    .toISOString()
+                    .split("T")[0];
+
+                  let expectedDate = null;
+                  if (this_card.expectedDate) {
+                    const tempExpectedDate = new Date(this_card.expectedDate);
+                    expectedDate = tempExpectedDate.toISOString().split("T")[0];
+                  }
+
                   all_cards_ids.push(this_card.id_card);
 
                   current_group.cards.push({
@@ -128,8 +139,8 @@ module.exports = {
                     id_group: this_card.id_group,
                     name: this_card.name,
                     description: this_card.description,
-                    creationDate: this_card.creationDate,
-                    expectedDate: this_card.expectedDate,
+                    creationDate: formattedDate,
+                    expectedDate: expectedDate,
                     style: this_card.style,
                     laneId: this_card.id_swinlane,
                     id_user: this_card.id_user,
