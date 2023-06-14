@@ -9,22 +9,28 @@ module.exports = {
       all_tags_ids: req.body.all_tags_ids,
     };
 
+    console.log(tagObj);
+
     if (tagObj.id_card && tagObj.all_tags_ids) {
-      await TagsService.deleteAllLinksByCardId(tagObj.id_card);
+      if (tagObj.all_tags_ids.length > 0) {
+        await TagsService.deleteAllLinksByCardId(tagObj.id_card);
 
-      let values_query = "";
+        let values_query = "";
 
-      tagObj.all_tags_ids.map((id_tag) => {
-        values_query += `(${tagObj.id_card}, ${id_tag}),`;
-      });
+        tagObj.all_tags_ids.map((id_tag) => {
+          values_query += `(${tagObj.id_card}, ${id_tag}),`;
+        });
 
-      values_query = values_query.substring(0, values_query.length - 1);
+        values_query = values_query.substring(0, values_query.length - 1);
 
-      const response = await TagsService.assignTagsToCard(values_query);
+        const response = await TagsService.assignTagsToCard(values_query);
 
-      if (response.affectedRows > 0) {
-        json.result = tagObj;
+        if (response.affectedRows > 0) {
+          json.result = tagObj;
+        }
       }
+
+      json.result = tagObj;
     } else {
       json.error = "Wrong tag parameters.";
     }
