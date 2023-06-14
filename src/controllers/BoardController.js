@@ -128,6 +128,8 @@ module.exports = {
                     id_group: this_card.id_group,
                     name: this_card.name,
                     description: this_card.description,
+                    creationDate: this_card.creationDate,
+                    expectedDate: this_card.expectedDate,
                     style: this_card.style,
                     laneId: this_card.id_swinlane,
                     id_user: this_card.id_user,

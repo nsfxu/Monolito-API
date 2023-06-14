@@ -13,7 +13,7 @@ DROP SCHEMA IF EXISTS `monolito` ;
 -- Schema monolito
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `monolito` DEFAULT CHARACTER SET utf8 ;
-USE `monolito` ;
+USE `monolito`;
 
 -- -----------------------------------------------------
 -- Table `monolito`.`boards`
@@ -140,13 +140,14 @@ CREATE TABLE IF NOT EXISTS `monolito`.`cards` (
   `order` INT NOT NULL,
   `description` LONGTEXT NULL,
   `name` VARCHAR(45) NOT NULL,
+  `creationDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `expectedDate` DATETIME NULL,
   `style` JSON NULL,
   `id_group` INT NOT NULL,
   `id_user` INT NULL DEFAULT 1,
   `id_swinlane` INT NULL,
   PRIMARY KEY (`id_card`, `id_group`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `monolito`.`tags`
@@ -193,8 +194,6 @@ INSERT INTO `monolito`.`boards` (`id_board`, `name`) VALUES ('2', 'Tester');
 
 
 INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1', 'Unassigned', 'Sem dono', '');
-INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1337', 'usu1', 'Usuário 1', 'none');
-INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1338', 'usu2', 'Usuário 2', 'none');
 INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('2', 'admin', 'admin', '$2b$10$yJU2NBrPJcYSFpP.nsOoj.5kxA8TetS4WB24V6ZUPN12KGc.q/Kla');
 
 
@@ -235,6 +234,10 @@ INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('1', '1');
 INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('1', '2');
 INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('2', '1');
 INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('3', '1');
+
+INSERT INTO `monolito`.`swinlanes` (`id_swinlane`, `order`, `name`, `id_board`) VALUES ('1', '0', 'Expedite', '1');
+INSERT INTO `monolito`.`swinlanes` (`id_swinlane`, `order`, `name`, `id_board`) VALUES ('2', '1', 'Flow', '1');
+
 
 
 
