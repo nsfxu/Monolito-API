@@ -54,6 +54,24 @@ module.exports = {
     });
   },
 
+  updateCardExpectedDate: ({ id_card, expectedDate }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE cards SET expectedDate = '${expectedDate}' WHERE id_card = ${id_card}`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          if (result.affectedRows > 0) accept(true);
+          else accept(false);
+        }
+      );
+    });
+  },
+
   updateCardGroup: ({ id_card, order, id_group, id_swinlane }) => {
     return new Promise((accept, reject) => {
       database.query(
@@ -93,6 +111,7 @@ module.exports = {
   updateCard: ({
     name,
     description,
+    expectedDate,
     style,
     id_group,
     id_user,
@@ -101,7 +120,7 @@ module.exports = {
   }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE cards SET name = '${name}', description = "${description}", style = ${style}, id_group = ${id_group}, id_user = ${id_user}, id_swinlane = ${id_swinlane} WHERE (id_card = ${id_card})`,
+        `UPDATE cards SET name = '${name}', expectedDate = ${expectedDate}, description = "${description}", style = ${style}, id_group = ${id_group}, id_user = ${id_user}, id_swinlane = ${id_swinlane} WHERE (id_card = ${id_card})`,
         (error, result) => {
           if (error) {
             reject(error);
@@ -119,6 +138,7 @@ module.exports = {
   createCard: ({
     name,
     description,
+    expectedDate,
     style,
     id_group,
     id_swinlane,
@@ -127,7 +147,7 @@ module.exports = {
     let orderBy = "`order`";
     return new Promise((accept, reject) => {
       database.query(
-        `INSERT INTO cards (${orderBy}, description, name, style, id_group, id_user, id_swinlane)  VALUES (0,'${description}','${name}',${style},${id_group},${id_user},${id_swinlane})`,
+        `INSERT INTO cards (${orderBy}, description, expectedDate, name, style, id_group, id_user, id_swinlane)  VALUES (0,'${description}', ${expectedDate},'${name}',${style},${id_group},${id_user},${id_swinlane})`,
         (error, results) => {
           if (error) {
             reject(error);

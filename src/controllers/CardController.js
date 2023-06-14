@@ -47,6 +47,7 @@ module.exports = {
       id_card: req.body.id_card,
       name: req.body.name,
       description: req.body.description,
+      expectedDate: req.body.expectedDate,
       style: req.body.style,
       id_group: req.body.id_group,
       id_swinlane: req.body.id_swinlane,
@@ -81,12 +82,12 @@ module.exports = {
       id_card: req.params.id_card,
       name: req.body.name,
       description: req.body.description,
+      expectedDate: req.body.expectedDate,
       id_user: req.body.id_user,
       id_group: req.body.id_group,
       id_swinlane: req.body.id_swinlane,
       style: req.body.style,
     };
-
 
     if (
       cardObj.id_card &&
@@ -98,6 +99,29 @@ module.exports = {
       cardObj.description = cardObj.description ? cardObj.description : null;
 
       const card_result = await CardService.updateCard(cardObj);
+
+      if (card_result) {
+        json.result = cardObj;
+      } else {
+        json.error = "Wrong card parameters";
+      }
+    } else {
+      json.error = "Wrong card parameters";
+    }
+
+    res.json(json);
+  },
+
+  updateCardExpectedDate: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let cardObj = {
+      id_card: req.params.id_card,
+      expectedDate: req.body.expectedDate,
+    };
+
+    if (cardObj.id_card && cardObj.expectedDate) {
+      const card_result = await CardService.updateCardExpectedDate(cardObj);
 
       if (card_result) {
         json.result = cardObj;
