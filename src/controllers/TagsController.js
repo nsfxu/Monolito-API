@@ -9,8 +9,6 @@ module.exports = {
       all_tags_ids: req.body.all_tags_ids,
     };
 
-    console.log(tagObj);
-
     if (tagObj.id_card && tagObj.all_tags_ids) {
       if (tagObj.all_tags_ids.length > 0) {
         await TagsService.deleteAllLinksByCardId(tagObj.id_card);

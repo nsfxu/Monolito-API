@@ -87,7 +87,6 @@ module.exports = {
       style: req.body.style,
     };
 
-    console.log(cardObj);
 
     if (
       cardObj.id_card &&
