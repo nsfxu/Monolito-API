@@ -33,8 +33,9 @@ module.exports = {
   },
   getAllColumnsFromBoard: (id_board) => {
     return new Promise((accept, reject) => {
+      const orderBy = "`order`";
       database.query(
-        `SELECT * FROM columns WHERE id_board = ${id_board}`,
+        `SELECT * FROM columns WHERE id_board = ${id_board} ORDER BY ${orderBy}`,
         (error, results) => {
           if (error) {
             reject(error);

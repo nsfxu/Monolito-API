@@ -22,7 +22,7 @@ module.exports = {
   updateColumnInfo: ({ id_column, name, show_swinlane }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE columns SET name = '${name}', show_swinlane = ${show_swinlane} WHERE id_column = ${id_column}`,
+        `UPDATE columns SET name = '${name}', show_swinlane = '${show_swinlane}' WHERE id_column = ${id_column}`,
         (error, results) => {
           if (error) {
             reject(error);
