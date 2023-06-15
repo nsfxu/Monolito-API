@@ -127,7 +127,10 @@ module.exports = {
 
                   let expectedDate = null;
 
-                  if (this_card.expectedDate) {
+                  if (
+                    this_card.expectedDate &&
+                    this_card.expectedDate != "0000-00-00 00:00:00"
+                  ) {
                     expectedDate = boardInfoUtils.formatDate(
                       this_card.expectedDate
                     );

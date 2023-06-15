@@ -120,7 +120,7 @@ module.exports = {
       expectedDate: req.body.expectedDate,
     };
 
-    if (cardObj.id_card && cardObj.expectedDate) {
+    if (cardObj.id_card) {
       const card_result = await CardService.updateCardExpectedDate(cardObj);
 
       if (card_result) {
