@@ -120,7 +120,7 @@ module.exports = {
   }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE cards SET name = '${name}', expectedDate = ${expectedDate}, description = "${description}", style = ${style}, id_group = ${id_group}, id_user = ${id_user}, id_swinlane = ${id_swinlane} WHERE (id_card = ${id_card})`,
+        `UPDATE cards SET name = '${name}', description = "${description}", expectedDate = '${expectedDate}', style = ${style}, id_group = ${id_group}, id_user = ${id_user}, id_swinlane = ${id_swinlane} WHERE (id_card = ${id_card})`,
         (error, result) => {
           if (error) {
             reject(error);
@@ -147,7 +147,7 @@ module.exports = {
     let orderBy = "`order`";
     return new Promise((accept, reject) => {
       database.query(
-        `INSERT INTO cards (${orderBy}, description, expectedDate, name, style, id_group, id_user, id_swinlane)  VALUES (0,'${description}', ${expectedDate},'${name}',${style},${id_group},${id_user},${id_swinlane})`,
+        `INSERT INTO cards (${orderBy}, description, expectedDate, name, style, id_group, id_user, id_swinlane)  VALUES (0,'${description}', '${expectedDate}','${name}',${style},${id_group},${id_user},${id_swinlane})`,
         (error, results) => {
           if (error) {
             reject(error);
