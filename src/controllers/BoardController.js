@@ -129,7 +129,7 @@ module.exports = {
 
                   if (this_card.expectedDate) {
                     expectedDate = boardInfoUtils.formatDate(
-                      this_card.creationDate
+                      this_card.expectedDate
                     );
                   }
 
