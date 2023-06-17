@@ -25,6 +25,7 @@ const tagsRoute = "tags";
 //#region USERS
 // router.get('/users', UserController.getAll);
 // router.get('/user/:id_user', UserController.getUser);
+router.post(`/${userRoute}/find`, UserController.findByUserName);
 router.post(`/${userRoute}/create`, UserController.createUser);
 router.post(`/${userRoute}/login`, UserController.login);
 router.get(`/${userRoute}/boards/:user_id`, UserController.getUserBoards);
@@ -53,10 +54,10 @@ router.delete(`/${columnRoute}/:id_column`, ColumnController.deleteColumn);
 router.post(`/${boardRoute}/create`, BoardController.create);
 // router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
 router.get(`/${boardRoute}/:board_id`, BoardController.getInfoV2);
-router.get(
-  `/${boardRoute}/users/:board_id`,
-  BoardController.getBoardParticipants
-);
+router.get(`/${boardRoute}/users/:board_id`, BoardController.getBoardParticipants);
+router.get(`/${boardRoute}/:board_id/users/:user_id`, BoardController.addUserToBoard);
+router.delete(`/${boardRoute}/:board_id/users/:user_id`, BoardController.deleteUserFromBoard);
+router.put(`/${boardRoute}/:board_id/users/:user_id`, BoardController.updateUserPermission);
 
 //#endregion
 
@@ -65,7 +66,7 @@ router.get(
 router.post(`/${cardRoute}/create`, CardController.createCard);
 router.put(`/${cardRoute}/:id_card`, CardController.updateCardGroup);
 router.put(`/${cardRoute}/edit/:id_card`, CardController.updateCard);
-router.put(`/${cardRoute}/edit/expected/:id_card`, CardController.updateCardExpectedDate);
+router.put(`/${cardRoute}/edit/expected/:id_card`,CardController.updateCardExpectedDate);
 router.delete(`/${cardRoute}/:id_card`, CardController.deleteCard);
 
 //#endregion
@@ -74,7 +75,10 @@ router.delete(`/${cardRoute}/:id_card`, CardController.deleteCard);
 router.put(`/${swinlaneRoute}/order/:id_board`, SwinlaneController.updateOrder);
 router.post(`/${swinlaneRoute}/create`, SwinlaneController.createSwinlane);
 router.put(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.updateSwinlane);
-router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
+router.delete(
+  `/${swinlaneRoute}/:id_swinlane`,
+  SwinlaneController.deleteSwinlane
+);
 
 //#endregion
 

@@ -3,6 +3,29 @@ const UserService = require("../services/UserService.js");
 const bcrypt = require("bcrypt");
 
 module.exports = {
+  findByUserName: async (req, res) => {
+    let json = { error: "", result: {} };
+    const username = req.body.username;
+
+    if (username) {
+      const response = await UserService.findByUserName(username);
+
+      if (response) {
+        json.result = {
+          id_user: response.id_user,
+          username: response.username,
+          name: response.name,
+        };
+      } else {
+        json.error = "User not found";
+      }
+    } else {
+      json.error = "Invalid username";
+    }
+
+    res.json(json);
+  },
+
   login: async (req, res) => {
     let json = { error: "", result: {} };
     let userObject = {

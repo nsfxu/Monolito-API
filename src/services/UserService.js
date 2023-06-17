@@ -56,4 +56,24 @@ module.exports = {
       );
     });
   },
+
+  findByUserName: (username) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `SELECT * FROM users WHERE username = '${username}'`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) {
+            accept(results[0]);
+          } else {
+            accept(false);
+          }
+        }
+      );
+    });
+  },
 };

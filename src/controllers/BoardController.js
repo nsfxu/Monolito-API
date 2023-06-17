@@ -281,4 +281,78 @@ module.exports = {
 
     res.json(json);
   },
+
+  addUserToBoard: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let userBoardObject = {
+      board_id: req.params.board_id,
+      user_id: req.params.user_id,
+      permission_id: req.body.permission_id,
+    };
+
+    if (
+      userBoardObject.user_id &&
+      userBoardObject.board_id &&
+      userBoardObject.permission_id
+    ) {
+      const user_result = await BoardService.addUserToBoard(userBoardObject);
+
+      if (user_result > 0) json.result = userBoardObject;
+      else json.result = "Invalid properties.";
+    } else {
+      json.error = "Invalid properties.";
+    }
+
+    res.json(json);
+  },
+
+  deleteUserFromBoard: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    const user_id = req.params.user_id;
+    const board_id = req.params.board_id;
+
+    if (user_id && board_id) {
+      const user_result = await BoardService.deleteUserFromBoard(
+        board_id,
+        user_id
+      );
+
+      if (user_result > 0) json.result = "User deleted.";
+      else json.result = "User id does not exists.";
+    } else {
+      json.error = "Invalid user id";
+    }
+
+    res.json(json);
+  },
+
+  updateUserPermission: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let userBoardObject = {
+      board_id: req.params.board_id,
+      user_id: req.params.user_id,
+      permission_id: req.body.permission_id,
+    };
+
+    if (
+      userBoardObject.board_id &&
+      userBoardObject.user_id &&
+      userBoardObject.permission_id
+    ) {
+      const response = await BoardService.updateUserPermission(userBoardObject);
+
+      if (response) {
+        json.result = userBoardObject;
+      } else {
+        json.error = "Wrong parameters";
+      }
+    } else {
+      json.error = "Wrong parameters";
+    }
+
+    res.json(json);
+  },
 };
