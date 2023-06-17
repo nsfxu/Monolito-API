@@ -58,23 +58,22 @@ module.exports = {
   updateSwinlane: async (req, res) => {
     let json = { error: "", result: {} };
 
-    let groupObj = {
-      id_group: req.params.id_group,
+    let swinlaneObj = {
+      id_swinlane: req.params.id_swinlane,
       name: req.body.name,
-      // show_wip: req.body.show_wip ? req.body.show_wip : false,
-      // wip_limit: req.body.wip_limit ? req.body.wip_limit : null,
+      style: req.body.style,
     };
 
-    if (groupObj.id_group) {
-      const response = await GroupService.updateGroupInfo(groupObj);
+    if (swinlaneObj.id_swinlane) {
+      const response = await SwinlaneService.updateSwinlane(swinlaneObj);
 
       if (response) {
-        json.result = groupObj;
+        json.result = swinlaneObj;
       } else {
-        json.error = "Wrong group parameters";
+        json.error = "Wrong swinlane parameters";
       }
     } else {
-      json.error = "Wrong group parameters";
+      json.error = "Wrong swinlane parameters";
     }
 
     res.json(json);
@@ -90,7 +89,7 @@ module.exports = {
 
     if (columnObj.id_board && columnObj.columns) {
       columnObj.columns.map(async (column, index) => {
-        await ColumnService.updateColumnOrder(column.id, index);
+        await SwinlaneService.updateSwinlaneOrder(column.id, index);
       });
 
       json.result = columnObj;

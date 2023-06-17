@@ -35,6 +35,22 @@ module.exports = {
     });
   },
 
+  updateSwinlane: ({ id_swinlane, name, style }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE swinlanes SET name = '${name}', styles = '${style}' WHERE id_swinlane = ${id_swinlane}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+
   getSwinlanesByBoardId: (id_board) => {
     return new Promise((accept, reject) => {
       database.query(
@@ -70,6 +86,24 @@ module.exports = {
           } else {
             accept(-1);
           }
+        }
+      );
+    });
+  },
+
+  updateSwinlaneOrder: (id_swinlane, order) => {
+    return new Promise((accept, reject) => {
+      let orderBy = "`order`";
+
+      database.query(
+        `UPDATE swinlanes SET ${orderBy} = ${order} WHERE id_swinlane = ${id_swinlane}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
         }
       );
     });

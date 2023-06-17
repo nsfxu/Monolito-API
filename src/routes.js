@@ -73,7 +73,8 @@ router.delete(`/${cardRoute}/:id_card`, CardController.deleteCard);
 //#region SWINLANE
 
 router.post(`/${swinlaneRoute}/create`, SwinlaneController.createSwinlane);
-// router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
+router.put(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.updateSwinlane);
+router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
 
 //#endregion
 
