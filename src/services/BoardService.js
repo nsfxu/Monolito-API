@@ -16,6 +16,21 @@ module.exports = {
       );
     });
   },
+  updateBoardInfo: ({ board_id, name, description }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE boards SET name = '${name}', description = '${description}' WHERE id_board = ${board_id}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
   addUserToBoard: (board_id, id_user, id_permission) => {
     return new Promise((accept, reject) => {
       database.query(

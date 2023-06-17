@@ -38,6 +38,30 @@ module.exports = {
     res.json(json);
   },
 
+  updateBoardInfo: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let boardObject = {
+      board_id: req.params.board_id,
+      name: req.body.name,
+      description: req.body.description,
+    };
+
+    if (boardObject.board_id && boardObject.name && boardObject.description) {
+      const response = await BoardService.updateBoardInfo(boardObject);
+
+      if (response) {
+        json.result = boardObject;
+      } else {
+        json.error = "Wrong parameters";
+      }
+    } else {
+      json.error = "Wrong parameters";
+    }
+
+    res.json(json);
+  },
+
   getInfoV2: async (req, res) => {
     const json = { error: "", result: {} };
     const base_json = {

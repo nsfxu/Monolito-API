@@ -52,8 +52,11 @@ router.delete(`/${columnRoute}/:id_column`, ColumnController.deleteColumn);
 //#region BOARD
 
 router.post(`/${boardRoute}/create`, BoardController.create);
+router.put(`/${boardRoute}/:board_id`, BoardController.updateBoardInfo);
+
 // router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
 router.get(`/${boardRoute}/:board_id`, BoardController.getInfoV2);
+
 router.get(`/${boardRoute}/users/:board_id`, BoardController.getBoardParticipants);
 router.post(`/${boardRoute}/:board_id/users/:user_id`, BoardController.addUserToBoard);
 router.delete(`/${boardRoute}/:board_id/users/:user_id`, BoardController.deleteUserFromBoard);
