@@ -82,19 +82,19 @@ module.exports = {
   updateOrder: async (req, res) => {
     let json = { error: "", result: {} };
 
-    let columnObj = {
+    let swinlaneObj = {
       id_board: req.params.id_board,
-      columns: req.body.columns,
+      swinlanes: req.body.swinlanes,
     };
 
-    if (columnObj.id_board && columnObj.columns) {
-      columnObj.columns.map(async (column, index) => {
+    if (swinlaneObj.id_board && swinlaneObj.swinlanes) {
+      swinlaneObj.swinlanes.map(async (column, index) => {
         await SwinlaneService.updateSwinlaneOrder(column.id, index);
       });
 
-      json.result = columnObj;
+      json.result = swinlaneObj;
     } else {
-      json.error = "Wrong card parameters";
+      json.error = "Wrong swinlane parameters";
     }
 
     res.json(json);
