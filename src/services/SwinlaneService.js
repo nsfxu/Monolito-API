@@ -38,7 +38,7 @@ module.exports = {
   updateSwinlane: ({ id_swinlane, name, style }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE swinlanes SET name = '${name}', styles = '${style}' WHERE id_swinlane = ${id_swinlane}`,
+        `UPDATE swinlanes SET name = '${name}', style = '${style}' WHERE id_swinlane = ${id_swinlane}`,
         (error, results) => {
           if (error) {
             reject(error);

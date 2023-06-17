@@ -88,8 +88,8 @@ module.exports = {
     };
 
     if (swinlaneObj.id_board && swinlaneObj.swinlanes) {
-      swinlaneObj.swinlanes.map(async (column, index) => {
-        await SwinlaneService.updateSwinlaneOrder(column.id, index);
+      swinlaneObj.swinlanes.map(async (swinlane, index) => {
+        await SwinlaneService.updateSwinlaneOrder(swinlane.id, index);
       });
 
       json.result = swinlaneObj;
