@@ -128,7 +128,7 @@ module.exports = {
   updateUserPermission: ({ board_id, user_id, permission_id }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE boards_has_users SET id_permission = ${permission_id}, WHERE id_board = ${board_id} AND id_user = ${user_id}`,
+        `UPDATE boards_has_users SET id_permission = ${permission_id} WHERE id_board = ${board_id} AND id_user = ${user_id}`,
         (error, results) => {
           if (error) {
             reject(error);

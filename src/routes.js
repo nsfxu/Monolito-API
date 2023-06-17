@@ -55,7 +55,7 @@ router.post(`/${boardRoute}/create`, BoardController.create);
 // router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
 router.get(`/${boardRoute}/:board_id`, BoardController.getInfoV2);
 router.get(`/${boardRoute}/users/:board_id`, BoardController.getBoardParticipants);
-router.get(`/${boardRoute}/:board_id/users/:user_id`, BoardController.addUserToBoard);
+router.post(`/${boardRoute}/:board_id/users/:user_id`, BoardController.addUserToBoard);
 router.delete(`/${boardRoute}/:board_id/users/:user_id`, BoardController.deleteUserFromBoard);
 router.put(`/${boardRoute}/:board_id/users/:user_id`, BoardController.updateUserPermission);
 

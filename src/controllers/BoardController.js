@@ -291,6 +291,8 @@ module.exports = {
       permission_id: req.body.permission_id,
     };
 
+    console.log(userBoardObject);
+
     if (
       userBoardObject.user_id &&
       userBoardObject.board_id &&
@@ -298,8 +300,9 @@ module.exports = {
     ) {
       const user_result = await BoardService.addUserToBoard(userBoardObject);
 
-      if (user_result > 0) json.result = userBoardObject;
-      else json.result = "Invalid properties.";
+      if (user_result) {
+        json.result = userBoardObject;
+      } else json.result = "Invalid properties.";
     } else {
       json.error = "Invalid properties.";
     }
