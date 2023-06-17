@@ -46,6 +46,22 @@ module.exports = {
       );
     });
   },
+  getBoardInfo: (id_board) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `SELECT * FROM boards WHERE id_board = ${id_board}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          if (results.length > 0) accept(results[0]);
+          else accept(false);
+        }
+      );
+    });
+  },
   getAllColumnsFromBoard: (id_board) => {
     return new Promise((accept, reject) => {
       const orderBy = "`order`";

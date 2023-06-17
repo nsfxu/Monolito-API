@@ -38,6 +38,21 @@ module.exports = {
     res.json(json);
   },
 
+  getBoardInfo: async (req, res) => {
+    let json = { error: "", result: [] };
+
+    const board_id = req.params.board_id;
+
+    let board_info = await BoardService.getBoardInfo(board_id);
+
+    if (board_info) {
+      json.result = board_info;
+    } else {
+      json.error = "This board_id doesnt exists.";
+    }
+    res.json(json);
+  },
+
   updateBoardInfo: async (req, res) => {
     let json = { error: "", result: {} };
 
