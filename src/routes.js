@@ -10,6 +10,7 @@ const ColumnController = require(`${controllers_path}/ColumnController.js`);
 const GroupController = require(`${controllers_path}/GroupController.js`);
 const SwinlaneController = require(`${controllers_path}/SwinlaneController.js`);
 const TagsController = require(`${controllers_path}/TagsController.js`);
+const CommentController = require(`${controllers_path}/CommentController.js`);
 
 //#region ROUTE NAMES
 const userRoute = "user";
@@ -19,6 +20,7 @@ const boardRoute = "board";
 const cardRoute = "card";
 const swinlaneRoute = "swinlane";
 const tagsRoute = "tags";
+const commentsRoute = "comments";
 
 //#endregion
 
@@ -58,10 +60,22 @@ router.get(`/${boardRoute}/info/:board_id`, BoardController.getBoardInfo);
 // router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
 router.get(`/${boardRoute}/:board_id`, BoardController.getInfoV2);
 
-router.get(`/${boardRoute}/users/:board_id`, BoardController.getBoardParticipants);
-router.post(`/${boardRoute}/:board_id/users/:user_id`, BoardController.addUserToBoard);
-router.delete(`/${boardRoute}/:board_id/users/:user_id`, BoardController.deleteUserFromBoard);
-router.put(`/${boardRoute}/:board_id/users/:user_id`, BoardController.updateUserPermission);
+router.get(
+  `/${boardRoute}/users/:board_id`,
+  BoardController.getBoardParticipants
+);
+router.post(
+  `/${boardRoute}/:board_id/users/:user_id`,
+  BoardController.addUserToBoard
+);
+router.delete(
+  `/${boardRoute}/:board_id/users/:user_id`,
+  BoardController.deleteUserFromBoard
+);
+router.put(
+  `/${boardRoute}/:board_id/users/:user_id`,
+  BoardController.updateUserPermission
+);
 
 //#endregion
 
@@ -70,7 +84,10 @@ router.put(`/${boardRoute}/:board_id/users/:user_id`, BoardController.updateUser
 router.post(`/${cardRoute}/create`, CardController.createCard);
 router.put(`/${cardRoute}/:id_card`, CardController.updateCardGroup);
 router.put(`/${cardRoute}/edit/:id_card`, CardController.updateCard);
-router.put(`/${cardRoute}/edit/expected/:id_card`,CardController.updateCardExpectedDate);
+router.put(
+  `/${cardRoute}/edit/expected/:id_card`,
+  CardController.updateCardExpectedDate
+);
 router.delete(`/${cardRoute}/:id_card`, CardController.deleteCard);
 
 //#endregion
@@ -92,6 +109,10 @@ router.delete(
 router.put(`/${tagsRoute}/card/:id_card`, TagsController.updateCardTags);
 // router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);
 
+//#endregion
+
+//#region COMMENTS
+router.get(`/${commentsRoute}/card/:id_card`, CommentController.getCommentsByCardId);
 //#endregion
 
 module.exports = router;

@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `monolito`.`columns` (
   `id_column` INT NOT NULL AUTO_INCREMENT,
   `order` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  `show_swinlane` VARCHAR(10) NOT NULL DEFAULT 'false',
-  `show_wip` VARCHAR(10) NOT NULL DEFAULT 'false',
+  `show_swinlane` VARCHAR(10) NOT NULL DEFAULT false,
+  `show_wip` VARCHAR(10) NOT NULL DEFAULT false,
   `wip_limit` INT NULL,
   `style` JSON NULL,
   `id_board` INT NOT NULL,
@@ -174,6 +174,20 @@ CREATE TABLE IF NOT EXISTS `monolito`.`cards_has_tags` (
   PRIMARY KEY (`id_card`, `id_tag`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `monolito`.`comments`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `monolito`.`comments` ;
+
+CREATE TABLE IF NOT EXISTS `monolito`.`comments` (
+  `id_comment` INT NOT NULL AUTO_INCREMENT,
+  `message` LONGTEXT NOT NULL,
+  `createdDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
+  `id_user` INT NOT NULL,
+  `id_card` INT NOT NULL,
+  PRIMARY KEY (`id_comment`))
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -238,7 +252,9 @@ INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('3', '1');
 INSERT INTO `monolito`.`swinlanes` (`id_swinlane`, `order`, `name`, `id_board`) VALUES ('1', '0', 'Expedite', '1');
 INSERT INTO `monolito`.`swinlanes` (`id_swinlane`, `order`, `name`, `id_board`) VALUES ('2', '1', 'Flow', '1');
 
-
+INSERT INTO `monolito`.`comments` (`id_comment`, `message`, `id_user`, `id_card`) VALUES ('1', 'Teste ', '2', '18');
+INSERT INTO `monolito`.`comments` (`id_comment`, `message`, `id_user`, `id_card`) VALUES ('2', 'Testado', '3', '18');
+INSERT INTO `monolito`.`comments` (`id_comment`, `message`, `id_user`, `id_card`) VALUES ('3', 'Ok', '2', '18');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
