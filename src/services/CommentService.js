@@ -1,6 +1,21 @@
 const database = require("../db.js");
 
 module.exports = {
+  createBoard: ({ id_card, id_user, message }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO comments (message, id_user, id_card) VALUES ('${message}', ${id_user}, ${id_card})`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
   getCommentsByCardId: (id_card) => {
     return new Promise((accept, reject) => {
       database.query(

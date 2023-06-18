@@ -113,6 +113,7 @@ router.put(`/${tagsRoute}/card/:id_card`, TagsController.updateCardTags);
 
 //#region COMMENTS
 router.get(`/${commentsRoute}/card/:id_card`, CommentController.getCommentsByCardId);
+router.post(`/${commentsRoute}/card/:id_card`, CommentController.createComment);
 //#endregion
 
 module.exports = router;
