@@ -73,6 +73,9 @@ module.exports = {
 
     console.log(tagObj);
     if (tagObj.id_tag) {
+      
+      tagObj.style = tagObj.style ? tagObj.style : null;
+
       const response = await TagsService.updateTag(tagObj);
 
       if (response) {

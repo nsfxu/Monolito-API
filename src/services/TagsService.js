@@ -72,7 +72,7 @@ module.exports = {
   createTag: ({ name, style, id_board }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `INSERT INTO tags (name, style, id_board) VALUES ('${name}', ${style}, ${id_board})`,
+        `INSERT INTO tags (name, style, id_board) VALUES ('${name}', '${style}', ${id_board})`,
         (error, results) => {
           if (error) {
             reject(error);
