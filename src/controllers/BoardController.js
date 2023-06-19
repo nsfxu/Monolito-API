@@ -330,7 +330,6 @@ module.exports = {
       permission_id: req.body.permission_id,
     };
 
-    console.log(userBoardObject);
 
     if (
       userBoardObject.user_id &&

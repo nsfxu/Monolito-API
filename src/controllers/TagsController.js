@@ -71,7 +71,6 @@ module.exports = {
       style: req.body.style,
     };
 
-    console.log(tagObj);
     if (tagObj.id_tag) {
       
       tagObj.style = tagObj.style ? tagObj.style : null;

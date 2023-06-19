@@ -56,7 +56,6 @@ module.exports = {
       wip_limit: req.body.wip_limit,
     };
 
-    console.log(columnObj);
 
     if (columnObj.id_column) {
       const response = await ColumnService.updateColumnInfo(columnObj);
