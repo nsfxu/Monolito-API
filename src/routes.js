@@ -107,7 +107,7 @@ router.delete(
 
 router.delete(`/${tagsRoute}/:id_tag`, TagsController.deleteTag);
 router.post(`/${tagsRoute}/create`, TagsController.createTag);
-router.put(`/${tagsRoute}/:id_card`, TagsController.updateTag);
+router.put(`/${tagsRoute}/:id_tag`, TagsController.updateTag);
 
 router.put(`/${tagsRoute}/card/:id_card`, TagsController.updateCardTags);
 // router.delete(`/${swinlaneRoute}/:id_swinlane`, SwinlaneController.deleteSwinlane);

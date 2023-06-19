@@ -87,7 +87,7 @@ module.exports = {
   updateTag: ({ id_tag, name, style }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE tag SET name = '${name}', style = ${style} WHERE id_tag = ${id_tag}`,
+        `UPDATE tags SET name = '${name}', style = '${style}' WHERE id_tag = ${id_tag}`,
         (error, results) => {
           if (error) {
             reject(error);

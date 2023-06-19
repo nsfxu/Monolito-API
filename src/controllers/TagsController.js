@@ -71,6 +71,7 @@ module.exports = {
       style: req.body.style,
     };
 
+    console.log(tagObj);
     if (tagObj.id_tag) {
       const response = await TagsService.updateTag(tagObj);
 
@@ -93,6 +94,7 @@ module.exports = {
 
     if (id_tag) {
       const tag_result = await TagsService.deleteTag(id_tag);
+      await TagsService.deleteTagLink(id_tag);
 
       if (tag_result > 0) {
         json.result = "Tag deleted.";
