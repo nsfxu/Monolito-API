@@ -69,4 +69,64 @@ module.exports = {
       );
     });
   },
+  createTag: ({ name, style, id_board }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `INSERT INTO tags (name, style, id_board) VALUES ('${name}', ${style}, ${id_board})`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+  updateTag: ({ id_tag, name, style }) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE tag SET name = '${name}', style = ${style} WHERE id_tag = ${id_tag}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results);
+        }
+      );
+    });
+  },
+  deleteTag: (id_tag) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from tags WHERE id_tag = ${id_tag}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
+  deleteTagLink: (id_tag) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from cards_has_tags WHERE id_tag = ${id_tag}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
 };
