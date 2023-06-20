@@ -109,6 +109,7 @@ module.exports = {
           name: this_column.name,
           showSwinLanes: this_column.show_swinlane === "true",
           showWip: this_column.show_wip === "true",
+          wip_limit: this_column.wip_limit ? this_column.wip_limit : null,
           style: this_column.style,
           groups: [],
         });
@@ -329,7 +330,6 @@ module.exports = {
       user_id: req.params.user_id,
       permission_id: req.body.permission_id,
     };
-
 
     if (
       userBoardObject.user_id &&
