@@ -33,8 +33,11 @@ module.exports = {
 
       const response = await CardService.updateCardsOrder(set, where);
 
-      json.misc = set;
-      json.result = response;
+      if (response) {
+        json.result = "Cards updated!";
+      } else {
+        json.error = "Wrong card parameterse";
+      }
     } else {
       json.error = "Wrong card parameterse";
     }
