@@ -1,6 +1,47 @@
 const CardService = require("../services/CardService.js");
 
 module.exports = {
+  updateCardGroupV2: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    let cardObj = {
+      id_group: req.body.id_group,
+      new_card: req.body.new_card,
+      cardOrder: req.body.cardOrder,
+    };
+
+    console.log(cardObj);
+    if (cardObj.id_group) {
+      if (cardObj.new_card) {
+        const card_response = await CardService.updateCardGroupV2(
+          cardObj.new_card.id_card,
+          cardObj.id_group,
+          cardObj.new_card.id_swinlane
+        );
+
+        console.log(card_response);
+      }
+
+      let set = "c.order = (CASE ";
+      let where = `c.id_group = ${cardObj.id_group}`;
+
+      cardObj.cardOrder.map((this_card) => {
+        set += `WHEN c.id_card = '${this_card.id_card}' THEN ${this_card.order} `;
+      });
+
+      set += "ELSE c.order END)";
+
+      const response = await CardService.updateCardsOrder(set, where);
+
+      json.misc = set;
+      json.result = response;
+    } else {
+      json.error = "Wrong card parameterse";
+    }
+
+    res.json(json);
+  },
+
   updateCardGroup: async (req, res) => {
     let json = { error: "", result: {} };
 
@@ -13,6 +54,8 @@ module.exports = {
     };
 
     if (cardObj.id_card && cardObj.id_group) {
+      const card_update_response = await CardService.updateCardGroup(cardObj);
+
       let set = "";
       let where = "";
 
@@ -25,8 +68,6 @@ module.exports = {
       }
 
       await CardService.updateCardsOrder(set, where);
-
-      const card_update_response = await CardService.updateCardGroup(cardObj);
 
       if (card_update_response) {
         json.result = "Card updated!";
@@ -88,7 +129,6 @@ module.exports = {
       id_swinlane: req.body.id_swinlane,
       style: req.body.style,
     };
-
 
     if (
       cardObj.id_card &&

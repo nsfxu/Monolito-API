@@ -72,6 +72,24 @@ module.exports = {
     });
   },
 
+  updateCardGroupV2: (id_card, id_group, id_swinlane) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `UPDATE cards c SET c.id_group = ${id_group}, c.id_swinlane = ${id_swinlane} WHERE c.id_card = ${id_card}`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+
+            return;
+          }
+
+          if (result.affectedRows > 0) accept(true);
+          else accept(false);
+        }
+      );
+    });
+  },
+
   updateCardGroup: ({ id_card, new_order, id_group, id_swinlane }) => {
     return new Promise((accept, reject) => {
       database.query(
