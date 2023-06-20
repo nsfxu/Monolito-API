@@ -72,10 +72,10 @@ module.exports = {
     });
   },
 
-  updateCardGroup: ({ id_card, order, id_group, id_swinlane }) => {
+  updateCardGroup: ({ id_card, new_order, id_group, id_swinlane }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `UPDATE cards c SET c.order = '${order}', c.id_group = '${id_group}', c.id_swinlane = ${id_swinlane} WHERE c.id_card = ${id_card}`,
+        `UPDATE cards c SET c.order = ${new_order}, c.id_group = ${id_group}, c.id_swinlane = ${id_swinlane} WHERE c.id_card = ${id_card}`,
         (error, result) => {
           if (error) {
             reject(error);
