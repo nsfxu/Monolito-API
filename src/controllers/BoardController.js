@@ -215,12 +215,13 @@ module.exports = {
           });
         }
 
-        all_cards_ids =
-          boardInfoUtils.changeBracketsToParenthesis(all_cards_ids);
+        let all_card_tags = [];
+        if (all_cards_ids.length > 0) {
+          all_cards_ids =
+            boardInfoUtils.changeBracketsToParenthesis(all_cards_ids);
 
-        const all_card_tags = await TagsService.getCardTagsByIdsCard(
-          all_cards_ids
-        );
+          all_card_tags = await TagsService.getCardTagsByIdsCard(all_cards_ids);
+        }
 
         if (all_card_tags) {
           base_json.card_tags = all_card_tags;
