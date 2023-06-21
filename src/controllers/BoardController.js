@@ -17,6 +17,8 @@ module.exports = {
       description: req.body.description ? req.body.description : "",
     };
 
+    console.log(boardObj);
+
     if (boardObj.id_user && boardObj.name) {
       const board_response = await BoardService.createBoard(boardObj);
 
@@ -33,6 +35,24 @@ module.exports = {
       }
     } else {
       json.error = "Wrong card parameters";
+    }
+
+    res.json(json);
+  },
+
+  delete: async (req, res) => {
+    let json = { error: "", result: {} };
+
+    const id_board = req.params.id_board;
+
+    if (id_board) {
+      const board_result = await BoardService.deleteBoard(id_board);
+      await BoardService.deleteUserLinks(id_board);
+
+      if (board_result > 0) json.result = "Board deleted.";
+      else json.result = "Board id does not exists.";
+    } else {
+      json.error = "Invalid board id";
     }
 
     res.json(json);

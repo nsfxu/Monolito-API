@@ -1,7 +1,7 @@
 const database = require("../db.js");
 
 module.exports = {
-  createBoard: ({ id_user, name, description }) => {
+  createBoard: ({ name, description }) => {
     return new Promise((accept, reject) => {
       database.query(
         `INSERT INTO boards (name, description) VALUES ('${name}', '${description}')`,
@@ -12,6 +12,36 @@ module.exports = {
           }
 
           accept(results);
+        }
+      );
+    });
+  },
+  deleteBoard: (id_board) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from boards WHERE id_board = ${id_board}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
+        }
+      );
+    });
+  },
+  deleteUserLinks: (id_board) => {
+    return new Promise((accept, reject) => {
+      database.query(
+        `DELETE from boards_has_users WHERE id_board = ${id_board}`,
+        (error, results) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          accept(results.affectedRows);
         }
       );
     });
@@ -126,7 +156,7 @@ module.exports = {
       );
     });
   },
-  addUserToBoard: ({ board_id, user_id, permission_id }) => {
+  addUserToBoard: (board_id, user_id, permission_id) => {
     return new Promise((accept, reject) => {
       database.query(
         `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${user_id}, ${permission_id})`,

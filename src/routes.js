@@ -55,6 +55,7 @@ router.delete(`/${columnRoute}/:id_column`, ColumnController.deleteColumn);
 
 router.post(`/${boardRoute}/create`, BoardController.create);
 router.put(`/${boardRoute}/:board_id`, BoardController.updateBoardInfo);
+router.delete(`/${boardRoute}/:board_id`, BoardController.delete);
 router.get(`/${boardRoute}/info/:board_id`, BoardController.getBoardInfo);
 
 // router.get(`/${boardRoute}/:board_id`, BoardController.getInfo);
