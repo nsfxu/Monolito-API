@@ -43,11 +43,11 @@ module.exports = {
   delete: async (req, res) => {
     let json = { error: "", result: {} };
 
-    const id_board = req.params.id_board;
+    const board_id = req.params.board_id;
 
-    if (id_board) {
-      const board_result = await BoardService.deleteBoard(id_board);
-      await BoardService.deleteUserLinks(id_board);
+    if (board_id) {
+      const board_result = await BoardService.deleteBoard(board_id);
+      await BoardService.deleteUserLinks(board_id);
 
       if (board_result > 0) json.result = "Board deleted.";
       else json.result = "Board id does not exists.";
