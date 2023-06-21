@@ -6,7 +6,7 @@ module.exports = {
       let orderBy = "`order`";
 
       database.query(
-        `INSERT INTO columns (${orderBy}, name, id_board) VALUES (${column_order}, '${name}', ${id_board})`,
+        `INSERT INTO columns (${orderBy}, name, show_wip, wip_limit, id_board) VALUES (${column_order}, '${name}', 'false', 0, ${id_board})`,
         (error, results) => {
           if (error) {
             reject(error);
