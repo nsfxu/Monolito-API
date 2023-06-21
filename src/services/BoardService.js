@@ -61,10 +61,10 @@ module.exports = {
       );
     });
   },
-  addUserToBoard: (board_id, id_user, id_permission) => {
+  addUserToBoard: ({ board_id, user_id, permission_id }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${id_user}, ${id_permission})`,
+        `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${user_id}, ${permission_id})`,
         (error, results) => {
           if (error) {
             reject(error);
@@ -152,21 +152,6 @@ module.exports = {
 
           if (results.length > 0) accept(results);
           else accept(false);
-        }
-      );
-    });
-  },
-  addUserToBoard: (board_id, user_id, permission_id) => {
-    return new Promise((accept, reject) => {
-      database.query(
-        `INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (${board_id}, ${user_id}, ${permission_id})`,
-        (error, results) => {
-          if (error) {
-            reject(error);
-            return;
-          }
-
-          accept(results);
         }
       );
     });
