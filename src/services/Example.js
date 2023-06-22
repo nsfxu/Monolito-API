@@ -1,28 +1,41 @@
 const database = require("../db.js");
 
 module.exports = {
-  getPwd: ({ username }) => {
+  getAll: () => {
+    return new Promise((accept, reject) => {
+      database.query("SELECT * FROM users", (error, results) => {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        accept(results);
+      });
+    });
+  },
+
+  getUser: (id_user) => {
     return new Promise((accept, reject) => {
       database.query(
-        `SELECT * FROM users WHERE username = '${username}'`,
-        (error, result) => {
+        `SELECT * FROM users WHERE id_user = ${id_user}`,
+        (error, results) => {
           if (error) {
             reject(error);
             return;
           }
 
-          if (result.length > 0) {
-            accept(result[0]);
-          } else {
-            accept(false);
-          }
+          if (results.length > 0) accept(results[0]);
+          else accept(false);
+
+          accept(results);
         }
       );
     });
   },
 
   insert: ({ username, name, password }) => {
-    return new Promise((accept, reject) => {
+    return new Promise((accept, reject) => {    
+
       database.query(
         `INSERT INTO users (username, name, password) VALUES ('${username}', '${name}', '${password}')`,
         (error, results) => {
@@ -31,47 +44,39 @@ module.exports = {
             return;
           }
 
-          accept({ username, name });
+          accept({ username, name, password });
         }
       );
     });
   },
 
-  getUserBoards: (user_id) => {
+  update: ({ id_user, username, name, password }) => {
     return new Promise((accept, reject) => {
       database.query(
-        `SELECT b.id_board, b.name, b.description, b.style, bu.id_permission FROM boards b, boards_has_users bu WHERE b.id_board = bu.id_board and bu.id_user = ${user_id}`,
+        `UPDATE users SET username = '${username}', name = '${name}', password = '${password}' WHERE id_user = '${id_user}'`,
         (error, results) => {
           if (error) {
             reject(error);
             return;
           }
 
-          if (results.length > 0) {
-            accept(results);
-          } else {
-            accept(false);
-          }
+          accept({ id_user, username, name, password });
         }
       );
     });
   },
 
-  findByUserName: (username) => {
+  delete: (id_user) => {
     return new Promise((accept, reject) => {
       database.query(
-        `SELECT * FROM users WHERE username = '${username}'`,
+        `DELETE from users WHERE id_user = '${id_user}'`,
         (error, results) => {
           if (error) {
             reject(error);
             return;
           }
 
-          if (results.length > 0) {
-            accept(results[0]);
-          } else {
-            accept(false);
-          }
+          accept(results.affectedRows);
         }
       );
     });
