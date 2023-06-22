@@ -22,11 +22,11 @@ module.exports = {
     if (boardObj.id_user && boardObj.name) {
       const board_response = await BoardService.createBoard(boardObj);
 
-      const response = await BoardService.addUserToBoard(
-        board_response.insertId,
-        boardObj.id_user,
-        1
-      );
+      const response = await BoardService.addUserToBoard({
+        board_id: board_response.insertId,
+        user_id: boardObj.id_user,
+        permission_id: 1,
+      });
 
       if (response) {
         json.result = boardObj;
@@ -352,7 +352,7 @@ module.exports = {
       permission_id: req.body.permission_id,
     };
 
-    console.log(userBoardObject)
+    console.log(userBoardObject);
     if (
       userBoardObject.user_id &&
       userBoardObject.board_id &&

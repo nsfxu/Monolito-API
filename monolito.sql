@@ -208,7 +208,7 @@ INSERT INTO `monolito`.`boards` (`id_board`, `name`) VALUES ('2', 'Tester');
 
 
 INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1', 'Unassigned', 'Sem dono', '');
-INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('2', 'admin', 'admin', '$2b$10$yJU2NBrPJcYSFpP.nsOoj.5kxA8TetS4WB24V6ZUPN12KGc.q/Kla');
+INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('2', 'admin', 'admin', '$2b$10$Jfym8fTYZwY0loc1YRa6/.f4TDZaEWdf/fphrtKfypc7yUyXtGLg2');
 
 
 INSERT INTO `monolito`.`permissions` (`id_permission`, `name`) VALUES ('1', 'Admin');
