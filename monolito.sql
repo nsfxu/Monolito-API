@@ -203,58 +203,25 @@ SELECT * FROM users;
 -- INSERTS
 --
 
-INSERT INTO `monolito`.`boards` (`id_board`, `name`) VALUES ('1', 'TCC');
-INSERT INTO `monolito`.`boards` (`id_board`, `name`) VALUES ('2', 'Tester');
-
-
-INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('1', 'Unassigned', 'Sem dono', '');
-INSERT INTO `monolito`.`users` (`id_user`, `username`, `name`, `password`) VALUES ('2', 'admin', 'admin', '$2b$10$Jfym8fTYZwY0loc1YRa6/.f4TDZaEWdf/fphrtKfypc7yUyXtGLg2');
-
-
 INSERT INTO `monolito`.`permissions` (`id_permission`, `name`) VALUES ('1', 'Admin');
 INSERT INTO `monolito`.`permissions` (`id_permission`, `name`) VALUES ('2', 'User');
 INSERT INTO `monolito`.`permissions` (`id_permission`, `name`) VALUES ('3', 'Guest');
 
+INSERT INTO users (id_user, username, name, password) VALUES (1,'giusier','Giusier Ferreira','$2b$10$/reNdkdDPzie0fPBYyGEIe4AqeBC6JQI4Lr5NMhYd.sjD5clzjK3S'),(2,'teste','Teste Teste','$2b$10$ichSxgP5p3c/55E7VbZx4O/uTG3cl66heMG6Lc8dfBQ4jb2QZKx6.');
 
-INSERT INTO `monolito`.`boards_has_users` (`id_board`, `id_user`, `id_permission`) VALUES ('1', '2', '1');
-INSERT INTO `monolito`.`boards_has_users` (`id_board`, `id_user`, `id_permission`) VALUES ('2', '2', '2');
+INSERT INTO boards (id_board, name, description, style) VALUES (1,'TCC','Quadro do projeto Kanban',NULL);
 
+INSERT INTO boards_has_users (id_board, id_user, id_permission) VALUES (1,1,1);
 
-INSERT INTO `monolito`.`columns` (`id_column`, `order`, `name`, `show_swinlane`, `id_board`) VALUES ('1', '0', 'To-Do', 'false', '1');
-INSERT INTO `monolito`.`columns` (`id_column`, `order`, `name`, `show_swinlane`, `id_board`) VALUES ('2', '1', 'Doing', 'true', '1');
-INSERT INTO `monolito`.`columns` (`id_column`, `order`, `name`, `show_swinlane`, `id_board`) VALUES ('3', '2', 'Done', 'false', '1');
+INSERT INTO columns (id_column, `order`, name, show_swinlane, show_wip, wip_limit, style, id_board) VALUES (1,0,'Backlog','0','false',0,NULL,1),(2,1,'Rotina','false','false',0,NULL,1),(3,2,'Fazendo','true','true',10,NULL,1),(4,3,'Feito','false','false',0,NULL,1);
+INSERT INTO `groups` (id_group, `order`, name, show_wip, wip_limit) VALUES (1,0,'Doing','false',NULL),(2,0,'Doing','false',NULL),(3,0,'Fazendo','false',NULL),(4,0,'Doing','false',NULL),(5,1,'Feito','false',NULL);
+INSERT INTO columns_has_groups (id_column, id_group) VALUES (1,1),(2,2),(3,3),(3,5),(4,4);
+INSERT INTO cards (id_card, `order`, description, name, creationDate, expectedDate, style, id_group, id_user, id_swinlane) VALUES (1,0,'null','Teste de API','2023-07-04 12:03:17','0000-00-00 00:00:00',NULL,2,1,NULL),(2,1,'null','Teste do Front-End','2023-07-04 12:14:34','0000-00-00 00:00:00',NULL,2,1,NULL),(3,10,'','Criação da contextualização','2023-07-04 12:55:06','0000-00-00 00:00:00',NULL,4,1,NULL),(4,9,'','Estudar Canvas de Proposta de Valor','2023-07-04 12:55:34','0000-00-00 00:00:00',NULL,4,1,NULL),(5,8,'','Criar base do software','2023-07-04 12:56:03','0000-00-00 00:00:00',NULL,4,1,NULL),(6,7,'','Criação do modal de configuração no quadro','2023-07-04 12:58:48','0000-00-00 00:00:00',NULL,4,1,NULL),(7,0,'','Gerenciamento de Raias','2023-07-04 12:59:31','0000-00-00 00:00:00',NULL,5,1,2),(8,5,'','Criar PPT','2023-07-04 13:00:50','0000-00-00 00:00:00',NULL,4,1,NULL),(9,1,'','Criar seção de comentários do card','2023-07-04 13:15:01','0000-00-00 00:00:00',NULL,5,1,1),(10,3,'null','Criar dashboard','2023-07-04 13:20:07','0000-00-00 00:00:00',NULL,4,1,NULL),(11,2,'null','Criar páginas de login e registro','2023-07-04 13:20:19','0000-00-00 00:00:00',NULL,4,1,NULL),(12,2,'','Conectar API com o Front-End','2023-07-04 13:20:36','0000-00-00 00:00:00',NULL,5,1,1),(13,0,'','Evoluir o projeto','2023-07-04 13:23:54','0000-00-00 00:00:00',NULL,1,NULL,NULL),(14,0,'','Atualizar documentação para o novo padrão','2023-07-04 13:38:09','0000-00-00 00:00:00',NULL,4,1,NULL);
+INSERT INTO cards_has_tags (id_card, id_tag) VALUES (1,4),(2,5),(3,6),(4,6),(5,2),(5,4),(5,5),(6,4),(6,5),(7,4),(7,5),(8,2),(9,4),(9,5),(10,4),(10,5),(11,4),(11,5),(12,4),(12,5),(13,4),(13,5),(13,6),(14,6);
 
+INSERT INTO swinlanes (id_swinlane, `order`, name, style, id_board) VALUES (1,0,'Priorizado','{\"color\": \"#d50d20\", \"textColor\": \"white\"}',1),(2,1,'Normal','{\"color\": \"#1686e8\", \"textColor\": \"white\"}',1);
+INSERT INTO tags (id_tag, name, style, id_board) VALUES (1,'DESPRIORIZADO','{\"color\": \"#FFFFFF\", \"backgroundColor\": \"#b210c5\"}',1),(2,'PRIORIZADO','{\"color\": \"#FFFFFF\", \"backgroundColor\": \"#c81c1f\"}',1),(3,'AGUARDANDO HAYALA','{\"color\": \"#FFFFFF\", \"backgroundColor\": \"#04ac94\"}',1),(4,'API','{\"color\": \"#FFFFFF\", \"backgroundColor\": \"#820dec\"}',1),(5,'WEB','{\"color\": \"#FFFFFF\", \"backgroundColor\": \"#0cc8ea\"}',1),(6,'DOCUMENTACAO','{\"color\": \"#FFFFFF\", \"backgroundColor\": \"#f5a623\"}',1);
 
-INSERT INTO `monolito`.`groups` (`id_group`, `order`, `name`) VALUES ('1', '0', 'Doing');
-INSERT INTO `monolito`.`groups` (`id_group`, `order`, `name`) VALUES ('2', '0', 'Doing');
-INSERT INTO `monolito`.`groups` (`id_group`, `order`, `name`) VALUES ('3', '1', 'Done');
-INSERT INTO `monolito`.`groups` (`id_group`, `order`, `name`) VALUES ('4', '0', 'Doing');
-
-
-INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('1', '1');
-INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('2', '3');
-INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('2', '2');
-INSERT INTO `monolito`.`columns_has_groups` (`id_column`, `id_group`) VALUES ('3', '4');
-
-INSERT INTO `monolito`.`cards` (`id_card`, `order`, `name`, `description`, `id_group`, `id_user`) VALUES ('1', '0', 'Criar banco de dados do projeto', 'Nenhuma...', '2', '1');
-INSERT INTO `monolito`.`cards` (`id_card`, `order`, `name`, `id_group`, `id_user`) VALUES ('2', '0', 'Criar API do projeto', '1', '1');
-INSERT INTO `monolito`.`cards` (`id_card`, `order`, `name`, `description`, `id_group`, `id_user`) VALUES ('3', '1', 'Conectar back-end com front-end', 'fazer isso após a criação do banco de dados / api', '1', '1');
-
-INSERT INTO `monolito`.`tags` (`id_tag`, `name`, `id_board`) VALUES ('1', 'Test', '1');
-INSERT INTO `monolito`.`tags` (`id_tag`, `name`, `id_board`) VALUES ('2', 'Pra ontem', '1');
-INSERT INTO `monolito`.`tags` (`id_tag`, `name`, `id_board`) VALUES ('3', 'Pra hoje', '1');
-
-INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('1', '1');
-INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('1', '2');
-INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('2', '1');
-INSERT INTO `monolito`.`cards_has_tags` (`id_card`, `id_tag`) VALUES ('3', '1');
-
-INSERT INTO `monolito`.`swinlanes` (`id_swinlane`, `order`, `name`, `id_board`) VALUES ('1', '0', 'Expedite', '1');
-INSERT INTO `monolito`.`swinlanes` (`id_swinlane`, `order`, `name`, `id_board`) VALUES ('2', '1', 'Flow', '1');
-
-INSERT INTO `monolito`.`comments` (`id_comment`, `message`, `id_user`, `id_card`) VALUES ('1', 'Teste ', '2', '18');
-INSERT INTO `monolito`.`comments` (`id_comment`, `message`, `id_user`, `id_card`) VALUES ('2', 'Testado', '3', '18');
-INSERT INTO `monolito`.`comments` (`id_comment`, `message`, `id_user`, `id_card`) VALUES ('3', 'Ok', '2', '18');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
